@@ -1,12 +1,12 @@
 <?php
 class Task
 {
-    private $id;
-    private $name;
-    private $description;
-    private $project_id;
-    private $assignees;
-    private $status;
+    private int $id;
+    private string $name;
+    private string $description;
+    private int $project_id;
+    private array $assignees;
+    private string $status;
 
     public function __construct($name, $description, $project_id, $assignees = [], $status)
     {

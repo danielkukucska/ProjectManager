@@ -1,11 +1,11 @@
 <?php
 class Project
 {
-    private $id;
-    private $name;
-    private $description;
-    private $start_date;
-    private $end_date;
+    private int $id;
+    private string $name;
+    private string $description;
+    private DateTime $start_date;
+    private DateTime $end_date;
 
     public function __construct($name, $description, $start_date, $end_date)
     {

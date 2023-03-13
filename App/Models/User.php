@@ -1,11 +1,11 @@
 <?php
 class User
 {
-    private $id;
-    private $name;
-    private $email;
-    private $password;
-    private $role; // can be 'admin' or 'regular'
+    private int $id;
+    private string $name;
+    private string $email;
+    private string $password;
+    private string $role; // can be 'admin' or 'regular'
 
     public function __construct($id, $name, $email, $password, $role)
     {
