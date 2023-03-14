@@ -8,7 +8,22 @@ class TaskRepository
         $this->db = $db;
     }
 
-    public function getById(int $id): ?Task
+    public function getByUserId(int $userId)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM tasks WHERE user_id = ?");
+        $stmt->execute([$userId]);
+        $rows = $stmt->fetch();
+
+        $tasks = [];
+        foreach ($rows as $row) {
+            $task = new Task($row['id'], $row['name'], $row['description'], $row['project_id'], $row['status']);
+            $tasks[] = $task;
+        }
+
+        return $tasks;
+    }
+
+    public function getById(int $id)
     {
         $stmt = $this->db->prepare("SELECT * FROM tasks WHERE id = ?");
         $stmt->execute([$id]);
@@ -21,7 +36,7 @@ class TaskRepository
         }
     }
 
-    public function getByProjectId(int $projectId): array
+    public function getByProjectId(int $projectId)
     {
         $stmt = $this->db->prepare("SELECT * FROM tasks WHERE project_id = ?");
         $stmt->execute([$projectId]);
@@ -35,7 +50,7 @@ class TaskRepository
         return $tasks;
     }
 
-    public function save(Task $task): void
+    public function save(Task $task)
     {
         if ($task->getId()) {
             $stmt = $this->db->prepare("UPDATE tasks SET name = ?, description = ?, project_id = ?, status = ? WHERE id = ?");
@@ -48,7 +63,7 @@ class TaskRepository
         }
     }
 
-    public function delete(Task $task): void
+    public function delete(Task $task)
     {
         $stmt = $this->db->prepare("DELETE FROM tasks WHERE id = ?");
         $stmt->execute([$task->getId()]);

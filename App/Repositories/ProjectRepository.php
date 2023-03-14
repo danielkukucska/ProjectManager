@@ -8,7 +8,37 @@ class ProjectRepository
         $this->db = $db;
     }
 
-    public function getById(int $id): ?Project
+    public function getAll()
+    {
+        $stmt = $this->db->prepare("SELECT * FROM projects");
+        $stmt->execute();
+        $rows = $stmt->fetch();
+
+        $projects = [];
+        foreach ($rows as $row) {
+            $project = new Project($row['id'], $row['name'], $row['description'], $row['start_date'], $row['end_date'], $row['owner_id']);
+            $projects[] = $project;
+        }
+
+        return $projects;
+    }
+
+    public function getByOwnerId(int $ownerId)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM projects WHERE owner_id = ?");
+        $stmt->execute([$ownerId]);
+        $rows = $stmt->fetch();
+
+        $projects = [];
+        foreach ($rows as $row) {
+            $project = new Project($row['id'], $row['name'], $row['description'], $row['start_date'], $row['end_date'], $row['owner_id']);
+            $projects[] = $project;
+        }
+
+        return $projects;
+    }
+
+    public function getById(int $id)
     {
         $stmt = $this->db->prepare("SELECT * FROM projects WHERE id = ?");
         $stmt->execute([$id]);
@@ -21,7 +51,7 @@ class ProjectRepository
         }
     }
 
-    public function save(Project $project): void
+    public function save(Project $project)
     {
         if ($project->getId()) {
             $stmt = $this->db->prepare("UPDATE projects SET name = ?, description = ?, start_date = ?, end_date = ? WHERE id = ?");
@@ -33,7 +63,7 @@ class ProjectRepository
         }
     }
 
-    public function delete(Project $project): void
+    public function delete(Project $project)
     {
         $stmt = $this->db->prepare("DELETE FROM projects WHERE id = ?");
         $stmt->execute([$project->getId()]);

@@ -2,14 +2,14 @@
 
 class TimesheetLineRepository
 {
-    private $db;
+    private PDO $db;
 
     public function __construct(PDO $db)
     {
         $this->db = $db;
     }
 
-    public function getById(int $id): ?TimesheetLine
+    public function getById(int $id)
     {
         $stmt = $this->db->prepare("SELECT * FROM timesheet_lines WHERE id = ?");
         $stmt->execute([$id]);
@@ -22,7 +22,7 @@ class TimesheetLineRepository
         }
     }
 
-    public function getByTimesheetId(int $timesheetId): array
+    public function getByTimesheetId(int $timesheetId)
     {
         $stmt = $this->db->prepare("SELECT * FROM timesheet_lines WHERE timesheet_id = ?");
         $stmt->execute([$timesheetId]);
@@ -37,7 +37,7 @@ class TimesheetLineRepository
         return $timesheetLines;
     }
 
-    public function save(TimesheetLine $timesheetLine): void
+    public function save(TimesheetLine $timesheetLine)
     {
         if ($timesheetLine->getId()) {
             $stmt = $this->db->prepare("UPDATE timesheet_lines SET timesheet_id = ?, task_id = ? WHERE id = ?");
@@ -50,7 +50,7 @@ class TimesheetLineRepository
         }
     }
 
-    public function delete(TimesheetLine $timesheetLine): void
+    public function delete(TimesheetLine $timesheetLine)
     {
         $stmt = $this->db->prepare("DELETE FROM timesheet_lines WHERE id = ?");
         $stmt->execute([$timesheetLine->getId()]);

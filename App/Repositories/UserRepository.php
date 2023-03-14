@@ -8,7 +8,7 @@ class UserRepository
         $this->db = $db;
     }
 
-    public function getById(int $id): ?User
+    public function getById(int $id)
     {
         $stmt = $this->db->prepare("SELECT * FROM users WHERE id = ?");
         $stmt->execute([$id]);
@@ -21,7 +21,7 @@ class UserRepository
         }
     }
 
-    public function getByEmail(string $email): ?User
+    public function getByEmail(string $email)
     {
         $stmt = $this->db->prepare("SELECT * FROM users WHERE email = ?");
         $stmt->execute([$email]);
@@ -34,7 +34,7 @@ class UserRepository
         }
     }
 
-    public function save(User $user): void
+    public function save(User $user)
     {
         if ($user->getId()) {
             $stmt = $this->db->prepare("UPDATE users SET name = ?, email = ?, password = ? WHERE id = ?");
@@ -47,7 +47,7 @@ class UserRepository
         }
     }
 
-    public function delete(User $user): void
+    public function delete(User $user)
     {
         $stmt = $this->db->prepare("DELETE FROM users WHERE id = ?");
         $stmt->execute([$user->getId()]);

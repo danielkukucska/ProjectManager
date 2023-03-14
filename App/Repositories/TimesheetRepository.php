@@ -2,32 +2,44 @@
 
 class TimesheetRepository
 {
-    private $db;
-    private $timesheetLineRepository;
+    private PDO $db;
 
-    public function __construct($db, TimesheetLineRepository $timesheetLineRepository)
+    public function __construct(PDO $db)
     {
         $this->db = $db;
-        $this->timesheetLineRepository = $timesheetLineRepository;
     }
 
-    public function getById(int $id): ?Timesheet
+    public function getByUserId(int $userId)
+    {
+
+        $stmt = $this->db->prepare("SELECT * FROM timesheets WHERE user_id = ?");
+        $stmt->execute([$userId]);
+        $rows = $stmt->fetch();
+
+        $timesheets = [];
+        foreach ($rows as $row) {
+            $timesheet = new Timesheet($row['id'], $row['user_id'], $row['start_date'], $row['end_date']);
+            $timesheets[] = $timesheet;
+        }
+
+        return $timesheets;
+    }
+
+    public function getById(int $id)
     {
         $stmt = $this->db->prepare("SELECT * FROM timesheets WHERE id = ?");
         $stmt->execute([$id]);
         $row = $stmt->fetch();
 
         if ($row) {
-            $lines = $this->timesheetLineRepository->getByTimesheetId($id);
-            return new Timesheet($row['id'], $row['user_id'], $row['start_date'], $row['end_date'], $lines);
+            return new Timesheet($row['id'], $row['user_id'], $row['start_date'], $row['end_date']);
         } else {
             return null;
         }
     }
 
-    public function save(Timesheet $timesheet): void
+    public function save(Timesheet $timesheet)
     {
-
         if ($timesheet->getId()) {
             $stmt = $this->db->prepare("UPDATE timesheets SET user_id = ?, start_date = ?, end_date = ? WHERE id = ?");
             $stmt->execute([$timesheet->getUserId(), $timesheet->getStartDate(), $timesheet->getEndDate(), $timesheet->getId()]);
@@ -39,7 +51,7 @@ class TimesheetRepository
         }
     }
 
-    public function delete(Timesheet $timesheet): void
+    public function delete(Timesheet $timesheet)
     {
         $stmt = $this->db->prepare("DELETE FROM timesheets WHERE id = ?");
         $stmt->execute([$timesheet->getId()]);
