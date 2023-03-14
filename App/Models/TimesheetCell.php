@@ -2,44 +2,49 @@
 class TimesheetCell
 {
     private int $id;
-    private int $taskId;
+    private int $timesheetLineId;
     private int $hoursWorked;
     private DateTime $date;
 
-    public function __construct(int $id, int $taskId, int $hoursWorked, DateTime $date)
+    public function __construct(int $id, int $timesheetLineId, int $hoursWorked, DateTime $date)
     {
         $this->id = $id;
-        $this->taskId = $taskId;
+        $this->timesheetLineId = $timesheetLineId;
         $this->hoursWorked = $hoursWorked;
         $this->date = $date;
     }
 
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getTaskId(): int
+    public function setId(int $id)
     {
-        return $this->taskId;
+        $this->id = $id;
     }
 
-    public function getHoursWorked(): int
+    public function getTimesheetLineId()
+    {
+        return $this->timesheetLineId;
+    }
+
+    public function getHours()
     {
         return $this->hoursWorked;
     }
 
-    public function setHoursWorked(int $hoursWorked): void
+    public function setHours(int $hoursWorked)
     {
         $this->hoursWorked = $hoursWorked;
     }
 
-    public function getDate(): DateTime
+    public function getDate()
     {
         return $this->date;
     }
 
-    public function setDate(DateTime $date): void
+    public function setDate(DateTime $date)
     {
         $this->date = $date;
     }

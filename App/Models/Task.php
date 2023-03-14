@@ -4,16 +4,15 @@ class Task
     private int $id;
     private string $name;
     private string $description;
-    private int $project_id;
-    private array $assignees;
+    private int $projectId;
     private string $status;
 
-    public function __construct($name, $description, $project_id, $assignees = [], $status)
+    public function __construct(int $id, string $name, string $description, int $projectId, string $status)
     {
+        $this->id = $id;
         $this->name = $name;
         $this->description = $description;
-        $this->project_id = $project_id;
-        $this->assignees = $assignees;
+        $this->projectId = $projectId;
         $this->status = $status;
     }
 
@@ -22,12 +21,17 @@ class Task
         return $this->id;
     }
 
+    public function setId(int $id)
+    {
+        $this->id = $id;
+    }
+
     public function getName()
     {
         return $this->name;
     }
 
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
@@ -37,40 +41,19 @@ class Task
         return $this->description;
     }
 
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->description = $description;
     }
 
     public function getProjectId()
     {
-        return $this->project_id;
+        return $this->projectId;
     }
 
-    public function setProjectId($project_id)
+    public function setProjectId(int $projectId)
     {
-        $this->project_id = $project_id;
-    }
-
-    public function getAssignees()
-    {
-        return $this->assignees;
-    }
-
-    public function addAssignee($user)
-    {
-        $this->assignees[] = $user;
-    }
-
-    public function removeAssignee($assigneeId)
-    {
-        foreach ($this->assignees as $key => $assignee) {
-            if ($assignee->getId() == $assigneeId) {
-                unset($this->assignees[$key]);
-                return true;
-            }
-        }
-        return false;
+        $this->projectId = $projectId;
     }
 
     public function getStatus()
@@ -78,7 +61,7 @@ class Task
         return $this->status;
     }
 
-    public function setStatus($status)
+    public function setStatus(string $status)
     {
         $this->status = $status;
     }

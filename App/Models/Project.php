@@ -4,15 +4,19 @@ class Project
     private int $id;
     private string $name;
     private string $description;
-    private DateTime $start_date;
-    private DateTime $end_date;
+    private DateTime $startDate;
+    private DateTime $endDate;
+    private int $ownerId;
 
-    public function __construct($name, $description, $start_date, $end_date)
+    public function __construct(int $id, string $name, string $description, DateTime $startDate, DateTime $endDate, int $ownerId)
     {
+        $this->id = $id;
+        $this->name = $name;
         $this->name = $name;
         $this->description = $description;
-        $this->start_date = $start_date;
-        $this->end_date = $end_date;
+        $this->startDate = $startDate;
+        $this->endDate = $endDate;
+        $this->ownerId = $ownerId;
     }
 
     public function getId()
@@ -20,12 +24,17 @@ class Project
         return $this->id;
     }
 
+    public function setId(int $id)
+    {
+        $this->id = $id;
+    }
+
     public function getName()
     {
         return $this->name;
     }
 
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
@@ -35,28 +44,33 @@ class Project
         return $this->description;
     }
 
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->description = $description;
     }
 
     public function getStartDate()
     {
-        return $this->start_date;
+        return $this->startDate;
     }
 
-    public function setStartDate($start_date)
+    public function setStartDate(DateTime $startDate)
     {
-        $this->start_date = $start_date;
+        $this->startDate = $startDate;
     }
 
     public function getEndDate()
     {
-        return $this->end_date;
+        return $this->endDate;
     }
 
-    public function setEndDate($end_date)
+    public function setEndDate(DateTime $endDate)
     {
-        $this->end_date = $end_date;
+        $this->endDate = $endDate;
+    }
+
+    public function getOwnerId()
+    {
+        return $this->ownerId;
     }
 }

@@ -2,37 +2,33 @@
 class TimesheetLine
 {
     private int $id;
-    private array $timesheetCells;
+    private int $timesheetId;
+    private int $taskId;
 
-    public function __construct(int $id, array $timesheetCells)
+    public function __construct(int $id, int $timesheetId, int $taskId)
     {
         $this->id = $id;
-        $this->timesheetCells = $timesheetCells;
+        $this->timesheetId = $timesheetId;
+        $this->taskId = $taskId;
     }
 
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getTimesheetCells(): array
+    public function setId(int $id)
     {
-        return $this->timesheetCells;
+        $this->id = $id;
     }
 
-    public function addTimesheetCell(TimesheetCell $timesheetCell): void
+    public function getTimesheetId()
     {
-        $this->timesheetCells[] = $timesheetCell;
+        return $this->timesheetId;
     }
 
-    public function removeTimesheetCell($timesheetCellId)
+    public function getTaskId()
     {
-        foreach ($this->timesheetCells as $key => $timesheetCell) {
-            if ($timesheetCell->getId() == $timesheetCellId) {
-                unset($this->timesheetCells[$key]);
-                return true;
-            }
-        }
-        return false;
+        return $this->taskId;
     }
 }

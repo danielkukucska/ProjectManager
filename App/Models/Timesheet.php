@@ -5,65 +5,47 @@ class Timesheet
     private int $userId;
     private DateTime $startDate;
     private DateTime $endDate;
-    private array $timesheetLines;
 
-    public function __construct(int $id, int $userId, DateTime $startDate, DateTime $endDate, array $timesheetLines = [])
+    public function __construct(int $id, int $userId, DateTime $startDate, DateTime $endDate)
     {
         $this->id = $id;
         $this->userId = $userId;
         $this->startDate = $startDate;
         $this->endDate = $endDate;
-        $this->timesheetLines = $timesheetLines;
     }
 
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getUserId(): int
+    public function setId(int $id)
+    {
+        $this->id = $id;
+    }
+
+    public function getUserId()
     {
         return $this->userId;
     }
 
-    public function getStartDate(): DateTime
+    public function getStartDate()
     {
         return $this->startDate;
     }
 
-    public function setStartDate(DateTime $startDate): void
+    public function setStartDate(DateTime $startDate)
     {
         $this->startDate = $startDate;
     }
 
-    public function getEndDate(): DateTime
+    public function getEndDate()
     {
         return $this->endDate;
     }
 
-    public function setEndDate(DateTime $endDate): void
+    public function setEndDate(DateTime $endDate)
     {
         $this->endDate = $endDate;
-    }
-
-    public function getTimesheetLines(): array
-    {
-        return $this->timesheetLines;
-    }
-
-    public function addTimesheetLine(TimesheetLine $timesheetLine): void
-    {
-        $this->timesheetLines[] = $timesheetLine;
-    }
-
-    public function removeTimesheetLine($timesheetLineId)
-    {
-        foreach ($this->timesheetLines as $key => $timesheetLine) {
-            if ($timesheetLine->getId() == $timesheetLineId) {
-                unset($this->timesheetLines[$key]);
-                return true;
-            }
-        }
-        return false;
     }
 }
