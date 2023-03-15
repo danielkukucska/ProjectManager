@@ -1,12 +1,12 @@
 <?php
 class TimesheetCell
 {
-    private int $id;
+    private ?int $id;
     private int $timesheetLineId;
     private int $hoursWorked;
     private DateTime $date;
 
-    public function __construct(int $id, int $timesheetLineId, int $hoursWorked, DateTime $date)
+    public function __construct(?int $id, int $timesheetLineId, int $hoursWorked, DateTime $date)
     {
         $this->id = $id;
         $this->timesheetLineId = $timesheetLineId;
@@ -29,12 +29,17 @@ class TimesheetCell
         return $this->timesheetLineId;
     }
 
-    public function getHours()
+    public function setTimesheetLineId(int $timesheetLineId)
+    {
+        $this->timesheetLineId = $timesheetLineId;
+    }
+
+    public function getHoursWorked()
     {
         return $this->hoursWorked;
     }
 
-    public function setHours(int $hoursWorked)
+    public function setHoursWorked(int $hoursWorked)
     {
         $this->hoursWorked = $hoursWorked;
     }

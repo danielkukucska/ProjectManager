@@ -49,10 +49,10 @@ class TimesheetCellRepository
     {
         if ($cell->getId()) {
             $stmt = $this->db->prepare("UPDATE timesheet_cells SET timesheet_line_id = ?, date = ?, hours = ? WHERE id = ?");
-            $stmt->execute([$cell->getTimesheetLineId(), $cell->getDate(), $cell->getHours(), $cell->getId()]);
+            $stmt->execute([$cell->getTimesheetLineId(), $cell->getDate(), $cell->getHoursWorked(), $cell->getId()]);
         } else {
             $stmt = $this->db->prepare("INSERT INTO timesheet_cells (timesheet_line_id, date, hours) VALUES (?, ?, ?)");
-            $stmt->execute([$cell->getTimesheetLineId(), $cell->getDate(), $cell->getHours()]);
+            $stmt->execute([$cell->getTimesheetLineId(), $cell->getDate(), $cell->getHoursWorked()]);
 
             $cell->setId($this->db->lastInsertId());
         }

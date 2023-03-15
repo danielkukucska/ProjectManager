@@ -22,7 +22,7 @@ class TimesheetLineRepository
         }
     }
 
-    public function getByTimesheetId(int $timesheetId)
+    public function getAllByTimesheetId(int $timesheetId)
     {
         $stmt = $this->db->prepare("SELECT * FROM timesheet_lines WHERE timesheet_id = ?");
         $stmt->execute([$timesheetId]);

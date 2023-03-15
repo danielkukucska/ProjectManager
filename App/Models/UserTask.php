@@ -1,15 +1,16 @@
 <?php
 class UserTask
 {
-    private int $id;
-    private int $taskId;
+    private ?int $id;
     private int $userId;
+    private int $taskId;
 
-    public function __construct(int $taskId, int $userId, int $id = null)
+    //TODO where to handle id = userId_taskId
+    public function __construct(?int $id,  int $userId, int $taskId,)
     {
         $this->id = $id;
-        $this->taskId = $taskId;
         $this->userId = $userId;
+        $this->taskId = $taskId;
     }
 
     public function getId()

@@ -1,12 +1,12 @@
 <?php
 class Timesheet
 {
-    private int $id;
+    private ?int $id;
     private int $userId;
     private DateTime $startDate;
     private DateTime $endDate;
 
-    public function __construct(int $id, int $userId, DateTime $startDate, DateTime $endDate)
+    public function __construct(?int $id, int $userId, DateTime $startDate, DateTime $endDate)
     {
         $this->id = $id;
         $this->userId = $userId;
@@ -27,6 +27,11 @@ class Timesheet
     public function getUserId()
     {
         return $this->userId;
+    }
+
+    public function setUserId(int $userId)
+    {
+        return $this->userId = $userId;
     }
 
     public function getStartDate()

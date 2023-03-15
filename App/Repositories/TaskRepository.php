@@ -8,21 +8,6 @@ class TaskRepository
         $this->db = $db;
     }
 
-    public function getByUserId(int $userId)
-    {
-        $stmt = $this->db->prepare("SELECT * FROM tasks WHERE user_id = ?");
-        $stmt->execute([$userId]);
-        $rows = $stmt->fetch();
-
-        $tasks = [];
-        foreach ($rows as $row) {
-            $task = new Task($row['id'], $row['name'], $row['description'], $row['project_id'], $row['status']);
-            $tasks[] = $task;
-        }
-
-        return $tasks;
-    }
-
     public function getById(int $id)
     {
         $stmt = $this->db->prepare("SELECT * FROM tasks WHERE id = ?");
@@ -36,7 +21,22 @@ class TaskRepository
         }
     }
 
-    public function getByProjectId(int $projectId)
+    public function getAllByUserId(int $userId)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM tasks WHERE user_id = ?");
+        $stmt->execute([$userId]);
+        $rows = $stmt->fetchAll();
+
+        $tasks = [];
+        foreach ($rows as $row) {
+            $task = new Task($row['id'], $row['name'], $row['description'], $row['project_id'], $row['status']);
+            $tasks[] = $task;
+        }
+
+        return $tasks;
+    }
+
+    public function getAllByProjectId(int $projectId)
     {
         $stmt = $this->db->prepare("SELECT * FROM tasks WHERE project_id = ?");
         $stmt->execute([$projectId]);

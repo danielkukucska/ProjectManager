@@ -1,13 +1,13 @@
 <?php
 class Task
 {
-    private int $id;
+    private ?int $id;
     private string $name;
     private string $description;
     private int $projectId;
     private string $status;
 
-    public function __construct(int $id, string $name, string $description, int $projectId, string $status)
+    public function __construct(?int $id, string $name, string $description, int $projectId, string $status)
     {
         $this->id = $id;
         $this->name = $name;

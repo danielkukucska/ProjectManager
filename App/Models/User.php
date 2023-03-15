@@ -1,13 +1,13 @@
 <?php
 class User
 {
-    private int $id;
+    private ?int $id;
     private string $name;
     private string $email;
     private string $password;
     private string $role; // can be 'admin' or 'regular'
 
-    public function __construct(int $id, string $name, string $email, string $password, string $role)
+    public function __construct(?int $id, string $name, string $email, string $password, string $role)
     {
         $this->id = $id;
         $this->name = $name;

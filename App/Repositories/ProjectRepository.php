@@ -23,11 +23,11 @@ class ProjectRepository
         return $projects;
     }
 
-    public function getByOwnerId(int $ownerId)
+    public function getAllByOwnerId(int $ownerId)
     {
         $stmt = $this->db->prepare("SELECT * FROM projects WHERE owner_id = ?");
         $stmt->execute([$ownerId]);
-        $rows = $stmt->fetch();
+        $rows = $stmt->fetchAll();
 
         $projects = [];
         foreach ($rows as $row) {
@@ -63,6 +63,7 @@ class ProjectRepository
         }
     }
 
+    //TODO for all delete: recycle bin?
     public function delete(Project $project)
     {
         $stmt = $this->db->prepare("DELETE FROM projects WHERE id = ?");

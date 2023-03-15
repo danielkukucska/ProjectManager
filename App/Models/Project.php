@@ -1,17 +1,16 @@
 <?php
 class Project
 {
-    private int $id;
+    private ?int $id;
     private string $name;
     private string $description;
     private DateTime $startDate;
     private DateTime $endDate;
     private int $ownerId;
 
-    public function __construct(int $id, string $name, string $description, DateTime $startDate, DateTime $endDate, int $ownerId)
+    public function __construct(?int $id, string $name, string $description, DateTime $startDate, DateTime $endDate, int $ownerId)
     {
         $this->id = $id;
-        $this->name = $name;
         $this->name = $name;
         $this->description = $description;
         $this->startDate = $startDate;
@@ -72,5 +71,10 @@ class Project
     public function getOwnerId()
     {
         return $this->ownerId;
+    }
+
+    public function setOwnerId(int $ownerId)
+    {
+        $this->ownerId = $ownerId;
     }
 }
