@@ -9,7 +9,7 @@ class TimesheetRepository
         $this->db = $db;
     }
 
-    public function getByUserId(int $userId)
+    public function getAllByUserId(int $userId)
     {
 
         $stmt = $this->db->prepare("SELECT * FROM timesheets WHERE user_id = ?");

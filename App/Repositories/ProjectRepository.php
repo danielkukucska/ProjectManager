@@ -12,11 +12,11 @@ class ProjectRepository
     {
         $stmt = $this->db->prepare("SELECT * FROM projects");
         $stmt->execute();
-        $rows = $stmt->fetch();
+        $rows = $stmt->fetchAll();
 
         $projects = [];
         foreach ($rows as $row) {
-            $project = new Project($row['id'], $row['name'], $row['description'], $row['start_date'], $row['end_date'], $row['owner_id']);
+            $project = new Project($row['id'], $row['name'], $row['description'], new DateTime($row['start_date']), new DateTime($row['end_date']), $row['owner_id']);
             $projects[] = $project;
         }
 
@@ -31,7 +31,7 @@ class ProjectRepository
 
         $projects = [];
         foreach ($rows as $row) {
-            $project = new Project($row['id'], $row['name'], $row['description'], $row['start_date'], $row['end_date'], $row['owner_id']);
+            $project = new Project($row['id'], $row['name'], $row['description'], new DateTime($row['start_date']), new DateTime($row['end_date']), $row['owner_id']);
             $projects[] = $project;
         }
 
@@ -45,7 +45,7 @@ class ProjectRepository
         $row = $stmt->fetch();
 
         if ($row) {
-            return new Project($row['id'], $row['name'], $row['description'], $row['start_date'], $row['end_date'], $row['owner_id']);
+            return new Project($row['id'], $row['name'], $row['description'], new DateTime($row['start_date']), new DateTime($row['end_date']), $row['owner_id']);
         } else {
             return null;
         }
@@ -54,11 +54,11 @@ class ProjectRepository
     public function save(Project $project)
     {
         if ($project->getId()) {
-            $stmt = $this->db->prepare("UPDATE projects SET name = ?, description = ?, start_date = ?, end_date = ? WHERE id = ?");
-            $stmt->execute([$project->getName(), $project->getDescription(), $project->getStartDate(), $project->getEndDate(), $project->getId()]);
+            $stmt = $this->db->prepare("UPDATE projects SET name = ?, description = ?, start_date = ?, end_date = ?, owner_id = ? WHERE id = ?");
+            $stmt->execute([$project->getName(), $project->getDescription(), $project->getStartDate()->format('Y-m-d H:i:s'), $project->getEndDate()->format('Y-m-d H:i:s'), $project->getOwnerId(), $project->getId()]);
         } else {
-            $stmt = $this->db->prepare("INSERT INTO projects (name, description, start_date, end_date) VALUES (?, ?, ?, ?)");
-            $stmt->execute([$project->getName(), $project->getDescription(), $project->getStartDate(), $project->getEndDate()]);
+            $stmt = $this->db->prepare("INSERT INTO projects (name, description, start_date, end_date, owner_id) VALUES (?, ?, ?, ?, ?)");
+            $stmt->execute([$project->getName(), $project->getDescription(), $project->getStartDate()->format('Y-m-d H:i:s'), $project->getEndDate()->format('Y-m-d H:i:s'), $project->getOwnerId()]);
             $project->setId((int) $this->db->lastInsertId());
         }
     }
