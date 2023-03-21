@@ -18,7 +18,7 @@ class TimesheetRepository
 
         $timesheets = [];
         foreach ($rows as $row) {
-            $timesheet = new Timesheet($row['id'], $row['user_id'], $row['start_date'], $row['end_date']);
+            $timesheet = new Timesheet($row["id"], $row["user_id"], $row["start_date"], $row["end_date"]);
             $timesheets[] = $timesheet;
         }
 
@@ -32,7 +32,7 @@ class TimesheetRepository
         $row = $stmt->fetch();
 
         if ($row) {
-            return new Timesheet($row['id'], $row['user_id'], $row['start_date'], $row['end_date']);
+            return new Timesheet($row["id"], $row["user_id"], $row["start_date"], $row["end_date"]);
         } else {
             return null;
         }

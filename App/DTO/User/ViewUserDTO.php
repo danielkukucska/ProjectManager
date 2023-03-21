@@ -4,7 +4,7 @@ class ViewUserDTO
     private int $id;
     private string $name;
     private string $email;
-    private string $role; // can be 'admin' or 'regular'
+    private string $role; // can be "admin" or "regular"
 
     public function __construct(User $user)
     {

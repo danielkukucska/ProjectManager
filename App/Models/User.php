@@ -5,7 +5,7 @@ class User
     private string $name;
     private string $email;
     private string $password;
-    private string $role; // can be 'admin' or 'regular'
+    private string $role; // can be "admin" or "regular"
 
     public function __construct(?int $id, string $name, string $email, string $password, string $role)
     {

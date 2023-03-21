@@ -15,7 +15,7 @@ class UserRepository
         $row = $stmt->fetch();
 
         if ($row) {
-            return new User($row['id'], $row['name'], $row['email'], $row['password'], $row["role"]);
+            return new User($row["id"], $row["name"], $row["email"], $row["password"], $row["role"]);
         } else {
             return null;
         }
@@ -28,7 +28,7 @@ class UserRepository
         $row = $stmt->fetch();
 
         if ($row) {
-            return new User($row['id'], $row['name'], $row['email'], $row['password'], $row["role"]);
+            return new User($row["id"], $row["name"], $row["email"], $row["password"], $row["role"]);
         } else {
             return null;
         }

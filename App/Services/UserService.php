@@ -12,12 +12,12 @@ class UserService
     {
         $existingUser = $this->userRepository->getByEmail($email);
         if ($existingUser) {
-            throw new Exception('A user with this email already exists');
+            throw new Exception("A user with this email already exists");
         }
 
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-        $user = new User(null, $name, $email, $passwordHash, 'regular');
+        $user = new User(null, $name, $email, $passwordHash, "regular");
         $this->userRepository->save($user);
     }
 
@@ -38,11 +38,11 @@ class UserService
         $user = $this->userRepository->getByEmail($email);
 
         if (!$user) {
-            throw new Exception('User not found');
+            throw new Exception("User not found");
         }
 
         if (!password_verify($currentPassword, $user->getPassword())) {
-            throw new Exception('Current password is incorrect');
+            throw new Exception("Current password is incorrect");
         }
 
         $user->setPassword(password_hash($newPassword, PASSWORD_DEFAULT));
@@ -55,7 +55,7 @@ class UserService
         $requestorUser = $this->userRepository->getById($requestorUserId);
 
         if (!$requestorUser) {
-            throw new Exception('User not found');
+            throw new Exception("User not found");
         }
 
         if ($requestorUser->getRole() !== "admin") {
@@ -72,13 +72,13 @@ class UserService
     public function demoteUser(int $userId, string $requestorUserId)
     {
         if ($userId === $requestorUserId) {
-            throw new Exception("Can't demote yourself");
+            throw new Exception("Can"t demote yourself");
         }
 
         $requestorUser = $this->userRepository->getById($requestorUserId);
 
         if (!$requestorUser) {
-            throw new Exception('User not found');
+            throw new Exception("User not found");
         }
 
         if ($requestorUser->getRole() !== "admin") {

@@ -17,10 +17,10 @@ class TimesheetCellRepository
 
         if ($row) {
             return new TimesheetCell(
-                $row['id'],
-                $row['timesheet_line_id'],
-                $row['date'],
-                $row['hours']
+                $row["id"],
+                $row["timesheet_line_id"],
+                $row["date"],
+                $row["hours"]
             );
         } else {
             return null;
@@ -35,10 +35,10 @@ class TimesheetCellRepository
         $cells = [];
         while ($row = $stmt->fetch()) {
             $cells[] = new TimesheetCell(
-                $row['id'],
-                $row['timesheet_line_id'],
-                $row['date'],
-                $row['hours']
+                $row["id"],
+                $row["timesheet_line_id"],
+                $row["date"],
+                $row["hours"]
             );
         }
 

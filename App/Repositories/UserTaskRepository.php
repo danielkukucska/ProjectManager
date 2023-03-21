@@ -15,7 +15,7 @@ class UserTaskRepository
         $row = $stmt->fetch();
 
         if ($row) {
-            return new UserTask($row['id'], $row['user_id'], $row['task_id']);
+            return new UserTask($row["id"], $row["user_id"], $row["task_id"]);
         } else {
             return null;
         }
@@ -29,7 +29,7 @@ class UserTaskRepository
 
         $userTasks = [];
         foreach ($rows as $row) {
-            $userTask = new UserTask($row['id'], $row['user_id'], $row['task_id']);
+            $userTask = new UserTask($row["id"], $row["user_id"], $row["task_id"]);
             $userTasks[] = $userTask;
         }
 
@@ -44,7 +44,7 @@ class UserTaskRepository
 
         $userTasks = [];
         foreach ($rows as $row) {
-            $userTask = new UserTask($row['id'], $row['user_id'], $row['task_id']);
+            $userTask = new UserTask($row["id"], $row["user_id"], $row["task_id"]);
             $userTasks[] = $userTask;
         }
 

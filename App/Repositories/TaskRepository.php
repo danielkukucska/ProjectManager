@@ -15,7 +15,7 @@ class TaskRepository
         $row = $stmt->fetch();
 
         if ($row) {
-            return new Task($row['id'], $row['name'], $row['description'], $row['project_id'], $row['status']);
+            return new Task($row["id"], $row["name"], $row["description"], $row["project_id"], $row["status"]);
         } else {
             return null;
         }
@@ -29,7 +29,7 @@ class TaskRepository
 
         $tasks = [];
         foreach ($rows as $row) {
-            $task = new Task($row['id'], $row['name'], $row['description'], $row['project_id'], $row['status']);
+            $task = new Task($row["id"], $row["name"], $row["description"], $row["project_id"], $row["status"]);
             $tasks[] = $task;
         }
 
@@ -44,7 +44,7 @@ class TaskRepository
 
         $tasks = [];
         foreach ($rows as $row) {
-            $tasks[] = new Task($row['id'], $row['name'], $row['description'], $row['project_id'], $row['status']);
+            $tasks[] = new Task($row["id"], $row["name"], $row["description"], $row["project_id"], $row["status"]);
         }
 
         return $tasks;

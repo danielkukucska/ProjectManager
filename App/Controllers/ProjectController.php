@@ -12,7 +12,7 @@ class ProjectController extends Controller
 
     public function index()
     {
-        echo $_SERVER['REQUEST_METHOD'];
+        echo $_SERVER["REQUEST_METHOD"];
         $projects = $this->projectService->getAll();
         $this->view("project/index", ["projects" => $projects]);
         // render a view to display the projects
@@ -28,7 +28,7 @@ class ProjectController extends Controller
     public function create()
     {
         // Render a view with a form to create a new project
-        include(dirname(__FILE__) . '/../Views/Project/create.php');
+        include(dirname(__FILE__) . "/../Views/Project/create.php");
     }
 
     public function store()
@@ -42,12 +42,12 @@ class ProjectController extends Controller
         // // Authenticate user
         // $user = $this->projectService->authenticateUser($request);
         // if (!$user) {
-        //     return $response->withJson(['error' => 'Unauthorized'], 401);
+        //     return $response->withJson(["error" => "Unauthorized"], 401);
         // }
 
         // // Check authorization
         // if (!$this->projectService->canCreateProject($user)) {
-        //     return $response->withJson(['error' => 'Forbidden'], 403);
+        //     return $response->withJson(["error" => "Forbidden"], 403);
         // }
 
         // $data = $_POST;
@@ -55,7 +55,7 @@ class ProjectController extends Controller
         // $data = new CreateProjectDTO($_POST["name"], $_POST["description"], $_POST["startDate"], $_POST["endDate"], $_POST["ownerId"]);
         $project = $this->projectService->create($data);
         echo print_r($project);
-        // redirect to the project's show page
+        // redirect to the project"s show page
         header("Location: projects/" . $project->getId());
         exit();
     }
@@ -70,7 +70,7 @@ class ProjectController extends Controller
     {
         $data = $_POST;
         // $this->projectService->update($id, $data);
-        // redirect to the project's show page
+        // redirect to the project"s show page
     }
 
     public function destroy($id)
