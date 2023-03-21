@@ -60,7 +60,6 @@ class RouteItem
         $pattern = "/^" . $pattern . "$/";
 
         if ($this->method == $method && preg_match($pattern, $url, $matches)) {
-            $this->params = [];
             foreach ($matches as $key => $value) {
                 if (is_string($key)) {
                     $this->params[$key] = $value;

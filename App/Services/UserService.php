@@ -72,7 +72,7 @@ class UserService
     public function demoteUser(int $userId, string $requestorUserId)
     {
         if ($userId === $requestorUserId) {
-            throw new Exception("Can"t demote yourself");
+            throw new Exception("Can't demote yourself");
         }
 
         $requestorUser = $this->userRepository->getById($requestorUserId);

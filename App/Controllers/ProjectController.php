@@ -8,8 +8,6 @@ class ProjectController extends Controller
         $this->projectService = $this->init(["ProjectRepository", "UserRepository"], "ProjectService");
     }
 
-
-
     public function index()
     {
         echo $_SERVER["REQUEST_METHOD"];
@@ -27,8 +25,7 @@ class ProjectController extends Controller
 
     public function create()
     {
-        // Render a view with a form to create a new project
-        include(dirname(__FILE__) . "/../Views/Project/create.php");
+        $this->view("project/create");
     }
 
     public function store()

@@ -1,5 +1,5 @@
 <?php
-class TimesheetServices
+class TimesheetService
 {
     private TimesheetRepository $timesheetRepository;
     private TimesheetLineRepository $timesheetLineRepository;
