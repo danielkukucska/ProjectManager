@@ -1,0 +1,7 @@
+Options -MultiViews
+
+RewriteEngine On
+
+RewriteBase /Projectmanager
+
+RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]

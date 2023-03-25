@@ -14,7 +14,7 @@ class TimesheetRepository
 
         $stmt = $this->db->prepare("SELECT * FROM timesheets WHERE user_id = ?");
         $stmt->execute([$userId]);
-        $rows = $stmt->fetch();
+        $rows = $stmt->fetchAll();
 
         $timesheets = [];
         foreach ($rows as $row) {

@@ -5,15 +5,14 @@ class TimesheetService
     private TimesheetLineRepository $timesheetLineRepository;
     private TimesheetCellRepository $timesheetCellRepository;
 
-
     public function __construct(
         TimesheetRepository $timesheetRepository,
         TimesheetLineRepository $timesheetLineRepository,
         TimesheetCellRepository $timesheetCellRepository
     ) {
-        $this->$timesheetRepository = $timesheetRepository;
-        $this->$timesheetLineRepository = $timesheetLineRepository;
-        $this->$timesheetCellRepository = $timesheetCellRepository;
+        $this->timesheetRepository = $timesheetRepository;
+        $this->timesheetLineRepository = $timesheetLineRepository;
+        $this->timesheetCellRepository = $timesheetCellRepository;
     }
 
     public function getById(int $id)

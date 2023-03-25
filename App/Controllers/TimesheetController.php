@@ -12,7 +12,6 @@ class TimesheetController extends Controller
     {
         //TODO auth and get user ID
         $timesheets = $this->timesheetService->getAllByUserId(1);
-        print_r($timesheets);
         $this->view("timesheet/index", ["timesheets" => $timesheets]);
     }
 

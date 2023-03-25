@@ -1,13 +1,8 @@
 <?php
-//title
-$pageTitle = "Me";
+$pageTitle = "Create Timesheet";
 ob_start();
 ?>
-<h1>Me</h1>
-<?php
-print_r($data["user"]);
-?>
-
+<h1>Create Timesheet</h1>
 <?php
 $content = ob_get_clean();
 include "./App/Views/Common/Layout.php";

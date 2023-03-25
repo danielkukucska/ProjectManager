@@ -12,7 +12,7 @@ class Controller
 
     private function connectToDb()
     {
-        require_once "../App/Core/Database.php";
+        require_once "./App/Core/Database.php";
         $this->db = $db;
     }
 
@@ -21,7 +21,7 @@ class Controller
         $repositoryInstances = [];
 
         foreach ($repositories as $repository) {
-            require_once "../App/Repositories/" . $repository . ".php";
+            require_once "./App/Repositories/" . $repository . ".php";
             $repositoryInstances[] = new $repository($this->db);
         }
 
@@ -30,7 +30,7 @@ class Controller
 
     private function loadService($service, $repositories)
     {
-        require_once "../App/Services/" . $service . ".php";
+        require_once "./App/Services/" . $service . ".php";
         $reflector = new ReflectionClass($service);
 
         // print_r($repositories);
@@ -40,11 +40,11 @@ class Controller
 
     public function view($view, $data = [])
     {
-        if (file_exists("../App/Views/" . $view . ".php")) {
-            require_once "../App/Views/" . $view . ".php";
+        if (file_exists("./App/Views/" . $view . ".php")) {
+            require_once "./App/Views/" . $view . ".php";
         } else {
 
-            require_once "../App/Views/Common/404.php";
+            require_once "./App/Views/Common/404.php";
         }
     }
 }

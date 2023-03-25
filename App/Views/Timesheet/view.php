@@ -1,11 +1,11 @@
 <?php
 //title
-$pageTitle = "Me";
+$pageTitle = "Timesheet";
 ob_start();
 ?>
-<h1>Me</h1>
+<h1>view Timesheet</h1>
 <?php
-print_r($data["user"]);
+print_r($data["timesheet"]);
 ?>
 
 <?php

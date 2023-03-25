@@ -2,24 +2,24 @@
 
 
 require_once "Core/config.php";
-require_once "Core/App.php";
-require_once "Core/Controller.php";
+// require_once "Core/App.php";
+// require_once "Core/Controller.php";
+// require_once "Core/Route.php";
 
 // Define a function to autoload classes
 spl_autoload_register(function ($className) {
     $directories = [
-        "../App/Controllers/",
-        "../App/Core/",
-        // "../App/DTO/**/*",
-        "../App/DTO/Project/",
-        "../App/DTO/Task/",
-        "../App/DTO/Timesheet/",
-        "../App/DTO/TimesheetCell/",
-        "../App/DTO/TimesheetLine/",
-        "../App/DTO/User/",
-        "../App/Models/",
-        "../App/Repositories/",
-        "../App/Services/",
+        "./App/Controllers/",
+        "./App/Core/",
+        "./App/DTO/Project/",
+        "./App/DTO/Task/",
+        "./App/DTO/Timesheet/",
+        "./App/DTO/TimesheetCell/",
+        "./App/DTO/TimesheetLine/",
+        "./App/DTO/User/",
+        "./App/Models/",
+        "./App/Repositories/",
+        "./App/Services/",
     ];
 
     foreach ($directories as $directory) {

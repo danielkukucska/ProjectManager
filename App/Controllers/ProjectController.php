@@ -10,7 +10,6 @@ class ProjectController extends Controller
 
     public function index()
     {
-        echo $_SERVER["REQUEST_METHOD"];
         $projects = $this->projectService->getAll();
         $this->view("project/index", ["projects" => $projects]);
         // render a view to display the projects

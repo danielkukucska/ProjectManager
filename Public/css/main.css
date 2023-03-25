@@ -1,0 +1,60 @@
+:root {
+	--page-top-offset: 5em;
+	--scroll-offset: 2.5em;
+	--scroll--offset-negative: -2.5em;
+}
+
+body {
+	overflow-x: hidden;
+}
+
+body > nav + * {
+	padding-top: var(--page-top-offset);
+}
+
+.nav-item img {
+	filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(65deg) brightness(104%) contrast(102%);
+	opacity: 0.549;
+	margin-right: auto !important;
+	margin-left: auto !important;
+}
+
+.nav-item .active img {
+	filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(65deg) brightness(104%) contrast(102%);
+	opacity: 1;
+}
+
+.nav-link {
+	color: hsla(0, 0%, 100%, 0.549);
+}
+
+.nav-link .active {
+	color: #fff;
+}
+
+.anchor {
+	padding-top: var(--scroll-offset);
+	margin-top: var(--scroll--offset-negative);
+}
+
+@media (min-width: 992px) {
+	.offcanvas {
+		visibility: visible;
+		position: relative;
+		background: none;
+		border: none;
+		justify-content: end;
+		color: red;
+	}
+}
+@media (max-width: 992px) {
+	.offcanvas {
+		width: 250px !important;
+	}
+	.offcanvas-start-md {
+		top: 0;
+		left: 0;
+		border-right: 1px solid rgba(0, 0, 0, 0.2);
+		transform: translateX(-100%);
+	}
+}

@@ -1,12 +1,9 @@
 <?php
-//title
-$pageTitle = "Me";
+$pageTitle = "Update Timesheet";
 ob_start();
 ?>
-<h1>Me</h1>
-<?php
-print_r($data["user"]);
-?>
+<h1>Update Timesheet</h1>
+
 
 <?php
 $content = ob_get_clean();

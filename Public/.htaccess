@@ -1,11 +1,3 @@
-Options -MultiViews
-
-RewriteEngine On
-
-RewriteBase /Projectmanager/Public
-
 #files and folders --> css, js
 ReWriteCond ${REQUEST_FILENAME} !-d
 ReWriteCond ${REQUEST_FILENAME} !-f
-
-RewriteRule ^(.+)$ index.php?url=$1 [L,QSA]

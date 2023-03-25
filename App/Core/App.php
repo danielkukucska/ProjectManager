@@ -8,6 +8,7 @@ class App
     public function __construct()
     {
         // Define routes
+        //projects
         Route::get("/projects", "ProjectController@index");
         Route::get("/projects/create", "ProjectController@create");
         Route::get("/projects/{projectId}", "ProjectController@show");
@@ -18,35 +19,35 @@ class App
         Route::put("/projects/{projectId}", "ProjectController@update");
         Route::delete("/projects/{projectId}", "ProjectController@destroy");
 
-
+        //tasks
         Route::get("/projects/{projectId}/tasks", "TaskController@index");
         Route::get("/projects/{projectId}/tasks/create", "TaskController@create");
         Route::get("/projects/{projectId}/tasks/{taskId}", "TaskController@show");
         Route::get("/projects/{projectId}/tasks/{taskId}/edit", "TaskController@edit");
         Route::get("/projects/{projectId}/tasks/{taskId}/delete", "TaskController@edit");
 
-        Route::post("/projects/{projectId}/tasks/{taskId}", "ProjectController@store");
-        Route::put("/projects/{projectId}/tasks/{taskId}", "ProjectController@update");
-        Route::delete("/projects/{projectId}/tasks/{taskId}", "ProjectController@destroy");
+        Route::post("/projects/{projectId}/tasks/{taskId}", "TaskController@store");
+        Route::put("/projects/{projectId}/tasks/{taskId}", "TaskController@update");
+        Route::delete("/projects/{projectId}/tasks/{taskId}", "TaskController@destroy");
 
-        Route::get("/timesheets", "TimeshetController@index");
-        Route::get("/timesheets/create", "TaskController@create");
-        Route::get("/timesheets/{timesheetId}", "TaskController@show");
-        Route::get("/timesheets/{timesheetId}/edit", "TaskController@edit");
+        //timesheets
+        Route::get("/timesheets", "TimesheetController@index");
+        Route::get("/timesheets/create", "TimesheetController@create");
+        Route::get("/timesheets/{timesheetId}", "TimesheetController@show");
+        Route::get("/timesheets/{timesheetId}/edit", "TimesheetController@edit");
 
-        Route::post("/timesheets", "ProjectController@store");
-        Route::put("/timesheets/{timesheetId}", "ProjectController@update");
-        Route::delete("/timesheets/{timesheetId}", "ProjectController@destroy");
+        Route::post("/timesheets", "TimesheetController@store");
+        Route::put("/timesheets/{timesheetId}", "TimesheetController@update");
+        Route::delete("/timesheets/{timesheetId}", "TimesheetController@destroy");
 
-
-
+        //ath
         Route::get("/auth", "UserController@index");
         Route::get("/auth/sign-up", "UserController@create");
         Route::get("/auth/sign-in", "UserController@login");
 
-        Route::post("/auth/sign-in", "ProjectController@authenticate");
-        Route::post("/auth/sign-up", "ProjectController@store");
-        Route::post("/auth/{userId}/update", "ProjectController@store");
+        Route::post("/auth/sign-in", "UserController@authenticate");
+        Route::post("/auth/sign-up", "UserController@store");
+        Route::post("/auth/{userId}/update", "UserController@store");
 
 
         // Dispatch the request

@@ -25,7 +25,7 @@ class Route
 
     public static function resolve()
     {
-        $url = str_replace("/Projectmanager/Public", "", $_SERVER["REQUEST_URI"]);
+        $url = str_replace("/projectmanager", "", strtolower($_SERVER["REQUEST_URI"]));
         $method = $_SERVER["REQUEST_METHOD"];
         foreach (self::$routes as $route) {
             if ($route->matches($method, $url)) {

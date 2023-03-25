@@ -1,11 +1,11 @@
 <?php
-//title
-$pageTitle = "Me";
+//prject title
+$pageTitle = "Timesheets";
 ob_start();
 ?>
-<h1>Me</h1>
+<h1>Timesheets</h1>
 <?php
-print_r($data["user"]);
+print_r($data["timesheets"]);
 ?>
 
 <?php
