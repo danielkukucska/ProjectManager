@@ -8,6 +8,21 @@ class UserRepository
         $this->db = $db;
     }
 
+    public function getAll()
+    {
+        $stmt = $this->db->prepare("SELECT * FROM users");
+        $stmt->execute();
+        $rows = $stmt->fetchAll();
+
+        $users = [];
+        foreach ($rows as $row) {
+            $user = new User($row["id"], $row["name"], $row["email"], $row["password"], $row["role"]);
+            $users[] = $user;
+        }
+
+        return $users;
+    }
+
     public function getById(int $id)
     {
         $stmt = $this->db->prepare("SELECT * FROM users WHERE id = ?");

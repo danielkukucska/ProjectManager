@@ -18,13 +18,13 @@ class ProjectController extends Controller
     public function show($id)
     {
         $project = $this->projectService->getById($id);
-        echo print_r($project);
-        // render a view to display the project
+        $this->view("project/view", ["project" => $project]);
     }
 
     public function create()
     {
-        $this->view("project/create");
+        $users = $this->projectService->getUsers();
+        $this->view("project/create", ["users" => $users]);
     }
 
     public function store()
@@ -47,11 +47,8 @@ class ProjectController extends Controller
         // }
 
         // $data = $_POST;
-        $data = new CreateProjectDTO("Test", "Test", new DateTime(), new DateTime(), 1);
-        // $data = new CreateProjectDTO($_POST["name"], $_POST["description"], $_POST["startDate"], $_POST["endDate"], $_POST["ownerId"]);
+        $data = new CreateProjectDTO($_POST["name"], $_POST["description"], new DateTime($_POST["startDate"]), new DateTime($_POST["endDate"]), $_POST["ownerId"]);
         $project = $this->projectService->create($data);
-        echo print_r($project);
-        // redirect to the project"s show page
         header("Location: projects/" . $project->getId());
         exit();
     }
@@ -59,7 +56,8 @@ class ProjectController extends Controller
     public function edit($id)
     {
         $project = $this->projectService->getById($id);
-        // render a view with a form to edit the project
+        $users = $this->projectService->getUsers();
+        $this->view("project/update", ["project" => $project, "users" => $users]);
     }
 
     public function update($id)

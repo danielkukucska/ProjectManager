@@ -119,4 +119,16 @@ class ProjectService
 
         return new ViewProjectDTO($project, $ownerDTO);
     }
+
+    public function getUsers()
+    {
+        $users = $this->userRepository->getAll();
+        $userDTOs = [];
+
+        foreach ($users as $user) {
+            $userDTO = new ViewUserDTO($user);
+            $userDTOs[] = $userDTO;
+        }
+        return $userDTOs;
+    }
 }

@@ -34,11 +34,21 @@
                                     Home
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="/ProjectManager/projects" class="nav-link">
-                                    <img class="d-md-block" src="/ProjectManager/Public/images/icons/resume.svg" alt="Resume icon" />
+
+                            <li class="nav-item dropdown">
+
+                                <a class="nav-link dropdown-toggle" href="/ProjectManager/projects" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img class="d-md-block" src="/ProjectManager/Public/images/icons/calendar.svg" alt="Calendar icon" />
                                     Projects
                                 </a>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li>
+                                        <a class="dropdown-item" href="/ProjectManager/projects/create">Create</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/ProjectManager/projects">All</a>
+                                    </li>
+                                </ul>
                             </li>
 
                             <li class="nav-item dropdown">
@@ -88,98 +98,6 @@
     </nav>
     <main>
         <?= $content ?>
-        <!-- <div class="container p-0 my-3 rounded-3 border shadow-md">
-            <div class="row p-4 align-items-center justify-content-between">
-                <div class="col-md-7 p-3">
-                    <h1 class="display-4 fw-bold lh-1">Registered subjects</h1>
-                    <p class="lead">The table below contains my registered subjcets for the first semester in the year of 2022/2023.</p>
-                </div>
-                <div class="col-md-4">
-                    <img class="rounded-3 w-100 bg-transparent" src="/ProjectManager/Public/images/online-course.png" alt="Representation image of online course" />
-                </div>
-            </div>
-        </div>
-
-        <div class="container my-3 p-0 rounded-3 border shadow-md table-responsive">
-            <table class="table table-striped table-dark mb-0">
-                <thead>
-                    <tr>
-                        <th>Subject code</th>
-                        <th>Subject name</th>
-                        <th id="credit">Credit</th>
-                    </tr>
-                </thead>
-                <tbody class="table-group-divider">
-                    <tr>
-                        <td>TBI_PI157K3</td>
-                        <td>Computer architerctures</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td>TBG_KM731K2</td>
-                        <td>Introduction to Communication Theory</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>TBP_IK190G3</td>
-                        <td>Digital contents</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td>TBP_MI937G2</td>
-                        <td>Information and Communication Technologies (ICT)</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>TBI_PI813G2</td>
-                        <td>High-level programming languages I.</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>TBI_PI739G2</td>
-                        <td>Web Programing I. practice</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>TBI_PI984K2</td>
-                        <td>Introduction to Labour Market Studies</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>TBI_PI812K3</td>
-                        <td>High-level programming languages I.</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td>TBI_PI321G2</td>
-                        <td>Foreign language I.</td>
-                        <td>2</td>
-                    </tr>
-
-                    <tr>
-                        <td>TBI_PI201G2</td>
-                        <td>Basics of Programming Methodology practice</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>TBI_PI741G2</td>
-                        <td>Introduction to Informatics (excercise)</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>TBI_PI740K2</td>
-                        <td>Introduction to Informatics (lecture)</td>
-                        <td>2</td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th colspan="2" scope="row">Summary:</th>
-                        <td headers="credit">27</td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div> -->
     </main>
 
     <footer class="container d-flex flex-wrap justify-content-between align-items-center my-4 border-top">

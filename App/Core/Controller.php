@@ -33,9 +33,7 @@ class Controller
         require_once "./App/Services/" . $service . ".php";
         $reflector = new ReflectionClass($service);
 
-        // print_r($repositories);
         return $reflector->newInstanceArgs($repositories);
-        // echo print_r($this->service);
     }
 
     public function view($view, $data = [])
