@@ -41,13 +41,13 @@ class UserController extends Controller
         //authenticate user
         //check if a password update
         switch ($action) {
-            case 'update password':
+            case "update password":
                 $this->userService->updatePassword("", "", "");
                 break;
-            case 'promote':
+            case "promote":
                 $this->userService->promoteUser(1, 1);
                 break;
-            case 'demote':
+            case "demote":
                 $this->userService->demoteUser(1, 1);
                 break;
 

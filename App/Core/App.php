@@ -16,7 +16,7 @@ class App
         Route::get("/projects/{projectId}/delete", "ProjectController@delete");
 
         Route::post("/projects", "ProjectController@store");
-        Route::put("/projects/{projectId}", "ProjectController@update");
+        Route::post("/projects/{projectId}", "ProjectController@update");
         Route::delete("/projects/{projectId}", "ProjectController@destroy");
 
         //tasks
@@ -26,8 +26,8 @@ class App
         Route::get("/projects/{projectId}/tasks/{taskId}/edit", "TaskController@edit");
         Route::get("/projects/{projectId}/tasks/{taskId}/delete", "TaskController@edit");
 
-        Route::post("/projects/{projectId}/tasks/{taskId}", "TaskController@store");
-        Route::put("/projects/{projectId}/tasks/{taskId}", "TaskController@update");
+        Route::post("/projects/{projectId}/tasks", "TaskController@store");
+        Route::post("/projects/{projectId}/tasks/{taskId}", "TaskController@update");
         Route::delete("/projects/{projectId}/tasks/{taskId}", "TaskController@destroy");
 
         //timesheets
@@ -37,7 +37,7 @@ class App
         Route::get("/timesheets/{timesheetId}/edit", "TimesheetController@edit");
 
         Route::post("/timesheets", "TimesheetController@store");
-        Route::put("/timesheets/{timesheetId}", "TimesheetController@update");
+        Route::post("/timesheets/{timesheetId}", "TimesheetController@update");
         Route::delete("/timesheets/{timesheetId}", "TimesheetController@destroy");
 
         //ath

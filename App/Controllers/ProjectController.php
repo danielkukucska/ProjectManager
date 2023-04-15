@@ -12,7 +12,6 @@ class ProjectController extends Controller
     {
         $projects = $this->projectService->getAll();
         $this->view("project/index", ["projects" => $projects]);
-        // render a view to display the projects
     }
 
     public function show($id)
@@ -62,9 +61,10 @@ class ProjectController extends Controller
 
     public function update($id)
     {
-        $data = $_POST;
-        // $this->projectService->update($id, $data);
-        // redirect to the project"s show page
+        $data = new UpdateProjectDTO($_POST["name"], $_POST["description"], new DateTime($_POST["startDate"]), new DateTime($_POST["endDate"]), $_POST["ownerId"]);
+        $project = $this->projectService->update($id, $data);
+        header("Location: " . $project->getId());
+        exit();
     }
 
     public function destroy($id)

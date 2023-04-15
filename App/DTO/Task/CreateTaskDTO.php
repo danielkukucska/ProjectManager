@@ -6,12 +6,12 @@ class CreateTaskDTO
     private int $projectId;
     private string $status;
 
-    public function __construct(string $name, string $description, int $projectId, string $status)
+    public function __construct(string $name, string $description, int $projectId)
     {
         $this->name = $name;
         $this->description = $description;
         $this->projectId = $projectId;
-        $this->status = $status;
+        $this->status = "TO DO";
     }
 
     public function getName()

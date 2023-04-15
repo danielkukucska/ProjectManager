@@ -5,57 +5,51 @@ class TaskController extends Controller
 
     public function __construct()
     {
-        $this->taskService = $this->init(["TaskRepository", "UserTaskRepository", "UserRepository"], "TaskService");
+        $this->taskService = $this->init(["TaskRepository", "UserTaskRepository", "UserRepository", "ProjectRepository"], "TaskService");
     }
 
     public function index($projectId)
     {
         $tasks = $this->taskService->getAllByProjectId($projectId);
-        print_r($tasks);
-        $this->view("task/index", ["tasks" => $tasks]);
+        $project = $this->taskService->getProject($projectId);
+        $this->view("task/index", ["project" => $project, "tasks" => $tasks]);
     }
 
-    public function show($id)
+    public function show($projectId, $taskId)
     {
-        $task = $this->taskService->getById($id);
-        if ($task === null) {
-            echo "Task not found";
-        } else {
-
-            echo "TASK: " . print_r($task) . "<br>";
-        }
-        $this->view("task/view", ["task" => $task]);
+        $project = $this->taskService->getProject($projectId);
+        $task = $this->taskService->getById($taskId);
+        $this->view("task/view", ["project" => $project, "task" => $task]);
     }
 
-    public function create()
+    public function create($projectId)
     {
-        $this->view("task/create");
+        $project = $this->taskService->getProject($projectId);
+        $this->view("task/create", ["project" => $project]);
     }
 
-    public function store()
+    public function store($projectId)
     {
-
-        // $data = $_POST;
-        $data = new CreateTaskDTO("Test", "Test", 1, "Test Status");
-        // $data = new CreateTaskDTO($_POST["name"], $_POST["description"], $_POST["startDate"], $_POST["endDate"], $_POST["ownerId"]);
-        $task = $this->taskService->create($data);
+        $createTaskDTO = new CreateTaskDTO($_POST["name"], $_POST["description"], $projectId);
+        $task = $this->taskService->create($createTaskDTO);
         echo print_r($task);
-        // redirect to the task"s show page
         header("Location: tasks/" . $task->getId());
         exit();
     }
 
-    public function edit($id)
+    public function edit($projectId, $taskId)
     {
-        $task = $this->taskService->getById($id);
-        // render a view with a form to edit the task
+        $project = $this->taskService->getProject($projectId);
+        $task = $this->taskService->getById($taskId);
+        $this->view("task/update", ["project" => $project, "task" => $task]);
     }
 
-    public function update($id)
+    public function update($projectId, $taskId)
     {
-        $data = $_POST;
-        // $this->taskService->update($id, $data);
-        // redirect to the task"s show page
+        $updateTaskDTO = new UpdateTaskDTO($projectId, $_POST["name"], $_POST["description"],  $_POST["status"]);
+        $task = $this->taskService->update($taskId, $updateTaskDTO);
+        header("Location: " . $task->getId());
+        exit();
     }
 
     public function destroy($id)

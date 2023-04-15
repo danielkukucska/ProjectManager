@@ -6,11 +6,11 @@ class UpdateTaskDTO
     private int $projectId;
     private string $status;
 
-    public function __construct(string $name, string $description, int $projectId, string $status)
+    public function __construct(int $projectId, string $name, string $description, string $status)
     {
+        $this->projectId = $projectId;
         $this->name = $name;
         $this->description = $description;
-        $this->projectId = $projectId;
         $this->status = $status;
     }
 

@@ -8,7 +8,7 @@ ob_start();
 </div>
 
 <div class="container my-3 p-0 rounded-3 border shadow-md">
-    <form class="row g-3 p-3" action="/Projectmanager/projects" method="POST">
+    <form class="row g-3 p-3" action="/ProjectManager/projects/<?= $project->getId() ?>" method="POST">
         <div class="mb-3">
             <label class="form-label" for="name">
                 Project Name

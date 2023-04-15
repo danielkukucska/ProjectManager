@@ -1,5 +1,6 @@
 <?php
 $pageTitle = "Projects";
+$projects = $data["projects"];
 ob_start();
 ?>
 
@@ -27,10 +28,11 @@ ob_start();
         </thead>
         <tbody class="table-group-divider">
             <?php
-            foreach ($data["projects"] as $project) : ?>
+            foreach ($projects as $project) : ?>
                 <tr>
                     <td>
                         <a class="btn btn-primary" href="./projects/<?= $project->getId() ?>">View</a>
+                        <a class="btn btn-primary" href="./projects/<?= $project->getId() ?>/tasks">Tasks</a>
                         <a class="btn btn-secondary" href="./projects/<?= $project->getId() ?>/edit">Edit</a>
                     </td>
                     <td><?= $project->getId() ?></td>

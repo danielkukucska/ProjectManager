@@ -4,12 +4,33 @@ class TaskService
     private TaskRepository $taskRepository;
     private UserTaskRepository $userTaskRepository;
     private UserRepository $userRepository;
+    private ProjectRepository $projectRepository;
 
-    public function __construct(TaskRepository $taskRepository, UserTaskRepository $userTaskRepository, UserRepository $userRepository)
+    public function __construct(TaskRepository $taskRepository, UserTaskRepository $userTaskRepository, UserRepository $userRepository, ProjectRepository $projectRepository)
     {
         $this->taskRepository = $taskRepository;
         $this->userTaskRepository = $userTaskRepository;
         $this->userRepository = $userRepository;
+        $this->projectRepository = $projectRepository;
+    }
+
+    public function getProject(int $projectId)
+    {
+        $project = $this->projectRepository->getById($projectId);
+
+        if (!$project) {
+            throw new Error("Project not found.");
+        }
+
+        $owner = $this->userRepository->getById($project->getOwnerId());
+
+        if (!$owner) {
+            throw new Error("Owner not found.");
+        }
+
+        $ownerDTO = new ViewUserDTO($owner);
+
+        return new ViewProjectDTO($project, $ownerDTO);
     }
 
     public function getById(int $id)
@@ -17,7 +38,7 @@ class TaskService
         $task = $this->taskRepository->getById($id);
 
         if (!$task) {
-            return null;
+            throw new Error("Task not found.");
         }
 
         $userTasks = $this->userTaskRepository->getAllByTaskId($task->getId());
@@ -27,8 +48,7 @@ class TaskService
             $assignee = $this->userRepository->getById($userTask->getId());
 
             if (!$assignee) {
-                //ERROR?
-                return null;
+                throw new Error("User not found.");
             } else {
                 $assignees[] = new ViewUserDTO($assignee);
             }
@@ -50,8 +70,7 @@ class TaskService
                 $assignee = $this->userRepository->getById($userTask->getId());
 
                 if (!$assignee) {
-                    //ERROR?
-                    return null;
+                    throw new Error("User not found.");
                 } else {
                     $assignees[] = new ViewUserDTO($assignee);
                 }
@@ -76,8 +95,7 @@ class TaskService
                 $assignee = $this->userRepository->getById($userTask->getId());
 
                 if (!$assignee) {
-                    //ERROR?
-                    return null;
+                    throw new Error("User not found-");
                 } else {
                     $assignees[] = new ViewUserDTO($assignee);
                 }
