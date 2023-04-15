@@ -10,50 +10,64 @@ class UserController extends Controller
 
     public function index()
     {
-        //show logged in user
-        $this->view("user/index");
+        $user = $_SESSION["user"];
+        $this->view("user/index", ["user" => $user]);
     }
 
-    public function create()
+    public function signUp()
     {
-        //sign-up form
-        $this->view("user/create");
+        $this->view("user/sign-up");
     }
 
     public function store()
     {
-        // $data = $_POST;
-        $this->userService->registerUser($_POST["name"], $_POST["email"], $_POST["password"]);
-        header("Location: auth/");
+        $this->userService->signUp($_POST["name"], $_POST["email"], $_POST["password"]);
+        header("Location: sign-in");
         exit();
     }
 
-    public function login()
+    public function signIn()
     {
-        // $user = $this->userService->getById($id);
-        // render a view with a form to edit the project
-        $this->view("user/update");
+        $this->view("user/sign-in");
+    }
+
+    public function signOut()
+    {
+        session_destroy();
+        header("Location: /ProjectManager/auth/sign-in");
+        exit();
+    }
+
+    public function changePassword()
+    {
+        $userId = $_SESSION["user"]->getId();
+        $this->view("user/change-password", ["userId" => $userId]);
+    }
+
+    public function authenticate()
+    {
+        $user = $this->userService->signIn($_POST["email"], $_POST["password"]);
+        $_SESSION["user"] = $user;
+        header("Location: /ProjectManager/auth");
+        exit();
     }
 
     public function update()
     {
-        $action = $_POST["action"];
-        //authenticate user
-        //check if a password update
-        switch ($action) {
-            case "update password":
-                $this->userService->updatePassword("", "", "");
+        switch ($_POST["action"]) {
+            case "change-password":
+                $this->userService->updatePassword($_POST["email"], $_POST["currentPassword"], $_POST["newPassword"]);
+                header("Location: /Projectmanager/auth");
+                exit();
                 break;
             case "promote":
-                $this->userService->promoteUser(1, 1);
+                $this->userService->promoteUser($_POST["userId"], $_SESSION["user"]->getId());
                 break;
             case "demote":
-                $this->userService->demoteUser(1, 1);
+                $this->userService->demoteUser($_POST["userId"], $_SESSION["user"]->getId());
                 break;
-
             default:
-                //return 404
-                break;
+                throw new Error("Invalid update action");
         }
     }
 }

@@ -8,7 +8,7 @@ class UserService
         $this->userRepository = $userRepository;
     }
 
-    public function registerUser(string $name, string $email, string $password)
+    public function signUp(string $name, string $email, string $password)
     {
         $existingUser = $this->userRepository->getByEmail($email);
         if ($existingUser) {
@@ -21,7 +21,7 @@ class UserService
         $this->userRepository->save($user);
     }
 
-    public function login(string $email, string $password)
+    public function signIn(string $email, string $password)
     {
         $user = $this->userRepository->getByEmail($email);
 
@@ -29,11 +29,10 @@ class UserService
             return new ViewUserDTO($user);
         }
 
-        //TODO throw instead?
-        return null;
+        throw new Exception("Not authenticated.");
     }
 
-    public function updatePassword(int $email, string $currentPassword, string $newPassword)
+    public function updatePassword(string $email, string $currentPassword, string $newPassword)
     {
         $user = $this->userRepository->getByEmail($email);
 

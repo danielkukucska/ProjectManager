@@ -72,24 +72,33 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="nav-item">
-                                <a href="/ProjectManager/auth/sign-in" class="nav-link">
-                                    <img class="d-md-block" src="/ProjectManager/Public/images/icons/videos.svg" alt="Videos icon" />
-                                    Sign In
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/ProjectManager/auth/sign-up" class="nav-link">
-                                    <img class="d-md-block" src="/ProjectManager/Public/images/icons/videos.svg" alt="Videos icon" />
-                                    Sign Up
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/ProjectManager/auth/sign-out" class="nav-link">
-                                    <img class="d-md-block" src="/ProjectManager/Public/images/icons/videos.svg" alt="Videos icon" />
-                                    Sign Out
-                                </a>
-                            </li>
+                            <?php if (isset($_SESSION["user"])) : ?>
+                                <li class="nav-item">
+                                    <a href="/ProjectManager/auth" class="nav-link">
+                                        <img class="d-md-block" src="/ProjectManager/Public/images/icons/videos.svg" alt="Videos icon" />
+                                        Me
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/ProjectManager/auth/sign-out" class="nav-link">
+                                        <img class="d-md-block" src="/ProjectManager/Public/images/icons/videos.svg" alt="Videos icon" />
+                                        Sign Out
+                                    </a>
+                                </li>
+                            <?php else : ?>
+                                <li class="nav-item">
+                                    <a href="/ProjectManager/auth/sign-in" class="nav-link">
+                                        <img class="d-md-block" src="/ProjectManager/Public/images/icons/videos.svg" alt="Videos icon" />
+                                        Sign In
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/ProjectManager/auth/sign-up" class="nav-link">
+                                        <img class="d-md-block" src="/ProjectManager/Public/images/icons/videos.svg" alt="Videos icon" />
+                                        Sign Up
+                                    </a>
+                                </li>
+                            <?php endif; ?>
                         </ul>
                     </div>
                 </div>
