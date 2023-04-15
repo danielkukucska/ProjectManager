@@ -42,10 +42,10 @@ class TaskService
         }
 
         $userTasks = $this->userTaskRepository->getAllByTaskId($task->getId());
-
+        print_r($userTasks);
         $assignees = [];
         foreach ($userTasks as $userTask) {
-            $assignee = $this->userRepository->getById($userTask->getId());
+            $assignee = $this->userRepository->getById($userTask->getUserId());
 
             if (!$assignee) {
                 throw new Error("User not found.");
@@ -92,7 +92,7 @@ class TaskService
 
             $assignees = [];
             foreach ($userTasks as $userTask) {
-                $assignee = $this->userRepository->getById($userTask->getId());
+                $assignee = $this->userRepository->getById($userTask->getUserId());
 
                 if (!$assignee) {
                     throw new Error("User not found-");
@@ -138,5 +138,51 @@ class TaskService
         $this->taskRepository->save($task);
 
         return new ViewTaskDTO($task, []);
+    }
+
+    public function addAssignment(CreateUserTaskDTO $createUserTaskDTO)
+    {
+        $task = $this->taskRepository->getById($createUserTaskDTO->getTaskId());
+        if (!$task) {
+            throw new Exception("Task not found");
+        }
+
+        $user = $this->userRepository->getById($createUserTaskDTO->getUserId());
+        if (!$user) {
+            throw new Exception("User not found");
+        }
+
+
+        $userTask = new UserTask(
+            null,
+            $user->getId(),
+            $task->getId()
+        );
+
+        $this->userTaskRepository->add($userTask);
+    }
+
+    public function removeAssignment(int $userId, int $taskId)
+    {
+        $userTask = $this->userTaskRepository->getByUserIdTaskId($userId, $taskId);
+
+        if (!$userTask) {
+            throw new Exception("Assignment not found");
+        }
+
+        //todo check timesheets?
+        $this->userTaskRepository->remove($userTask);
+    }
+
+    public function getUsers()
+    {
+        $users = $this->userRepository->getAll();
+        $userDTOs = [];
+
+        foreach ($users as $user) {
+            $userDTO = new ViewUserDTO($user);
+            $userDTOs[] = $userDTO;
+        }
+        return $userDTOs;
     }
 }

@@ -28,11 +28,30 @@ class TaskController extends Controller
         $this->view("task/create", ["project" => $project]);
     }
 
+    public function addAssignment($projectId, $taskId)
+    {
+        $userTask = new CreateUserTaskDTO($_POST["userId"], $taskId);
+        $this->taskService->addAssignment($userTask);
+
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit();
+    }
+
+
+    public function removeAssignment($projectId, $taskId, $userId)
+    {
+        $this->taskService->removeAssignment($userId, $taskId);
+
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit();
+    }
+
+
     public function store($projectId)
     {
         $createTaskDTO = new CreateTaskDTO($_POST["name"], $_POST["description"], $projectId);
         $task = $this->taskService->create($createTaskDTO);
-        echo print_r($task);
+
         header("Location: tasks/" . $task->getId());
         exit();
     }
@@ -41,7 +60,8 @@ class TaskController extends Controller
     {
         $project = $this->taskService->getProject($projectId);
         $task = $this->taskService->getById($taskId);
-        $this->view("task/update", ["project" => $project, "task" => $task]);
+        $users = $this->taskService->getUsers();
+        $this->view("task/update", ["project" => $project, "task" => $task, "users" => $users]);
     }
 
     public function update($projectId, $taskId)
@@ -52,7 +72,7 @@ class TaskController extends Controller
         exit();
     }
 
-    public function destroy($id)
+    public function destroy($projectId, $taskId)
     {
         throw new Error("Not implemented");
         //$this->taskService->deleteTask($id);

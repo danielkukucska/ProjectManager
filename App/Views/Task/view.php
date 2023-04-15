@@ -45,21 +45,14 @@ ob_start();
             <div class="col-md mb-3">
                 <h2 class="mb-3 anchor">Assignees</h2>
                 <ul class="list-group">
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                        <div class="ms-2 me-auto">
-                            <div class="fw-bold"><?= $project->getOwner()->getName() ?></div>
-                        </div>
-                        <span class="badge bg-primary rounded-pill"><?= $project->getOwner()->getEmail() ?></span>
-                    </li>
-
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                        <div class="ms-2 me-auto">
-                            <div class="fw-bold"><?= $project->getOwner()->getName() ?></div>
-                            TODO: list employees
-                        </div>
-                        <span class="badge bg-primary rounded-pill"><?= $project->getOwner()->getEmail() ?></span>
-                    </li>
-
+                    <?php foreach ($task->getAssignees() as $assignee) : ?>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold"><?= $assignee->getName() ?></div>
+                            </div>
+                            <span class="badge bg-primary rounded-pill"><?= $assignee->getEmail() ?></span>
+                        </li>
+                    <?php endforeach ?>
 
                 </ul>
             </div>

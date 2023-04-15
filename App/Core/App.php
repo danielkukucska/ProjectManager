@@ -19,18 +19,20 @@ class App
 
         Route::post("/projects", "ProjectController@store", true);
         Route::post("/projects/{projectId}", "ProjectController@update", true);
-        Route::delete("/projects/{projectId}", "ProjectController@destroy", true);
+        Route::post("/projects/{projectId}/delete", "ProjectController@destroy", true);
 
         //tasks
         Route::get("/projects/{projectId}/tasks", "TaskController@index", true);
         Route::get("/projects/{projectId}/tasks/create", "TaskController@create", true);
         Route::get("/projects/{projectId}/tasks/{taskId}", "TaskController@show", true);
         Route::get("/projects/{projectId}/tasks/{taskId}/edit", "TaskController@edit", true);
-        Route::get("/projects/{projectId}/tasks/{taskId}/delete", "TaskController@edit", true);
+        Route::get("/projects/{projectId}/tasks/{taskId}/delete", "TaskController@delete", true);
 
         Route::post("/projects/{projectId}/tasks", "TaskController@store", true);
         Route::post("/projects/{projectId}/tasks/{taskId}", "TaskController@update", true);
-        Route::delete("/projects/{projectId}/tasks/{taskId}", "TaskController@destroy", true);
+        Route::post("/projects/{projectId}/tasks/{taskId}/assignments", "TaskController@addAssignment", true);
+        Route::post("/projects/{projectId}/tasks/{taskId}/assignments/{userId}/delete", "TaskController@removeAssignment", true);
+        Route::post("/projects/{projectId}/tasks/{taskId}/delete", "TaskController@destroy", true);
 
         //timesheets
         Route::get("/timesheets", "TimesheetController@index", true);
@@ -40,7 +42,7 @@ class App
 
         Route::post("/timesheets", "TimesheetController@store", true);
         Route::post("/timesheets/{timesheetId}", "TimesheetController@update", true);
-        Route::delete("/timesheets/{timesheetId}", "TimesheetController@destroy", true);
+        Route::post("/timesheets/{timesheetId}/delete", "TimesheetController@destroy", true);
 
         //ath
         Route::get("/auth", "UserController@index", true);

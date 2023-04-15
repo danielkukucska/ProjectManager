@@ -39,6 +39,40 @@ ob_start();
         </div>
     </form>
 </div>
+<div class="container my-3 p-0 rounded-3 border shadow-md">
+    <div class="row g-3 p-3">
+        <div class="col-md mb-3">
+            <h2 class="mb-3 anchor">Assignees</h2>
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <form class="d-flex gap-3 justify-content-between w-100" action="/Projectmanager/projects/<?= $project->getId() ?>/tasks/<?= $task->getId() ?>/assignments" method="POST">
+                        <select class="form-select" id="userId" name="userId">
+                            <option selected>Add assignee</option>
+                            <?php foreach ($data["users"] as $user) : ?>
+                                <option value="<?= $user->getId() ?>"><?= $user->getName() ?> - <?= $user->getEmail() ?></option>;
+                            <?php endforeach; ?>
+                        </select>
+
+                        <input class="form-control" type="submit" value="Add" />
+
+                    </form>
+                </li>
+                <?php foreach ($task->getAssignees() as $assignee) : ?>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold"><?= $assignee->getName() ?></div>
+                            <p><?= $assignee->getEmail() ?></p>
+                        </div>
+                        <form action="/Projectmanager/projects/<?= $project->getId() ?>/tasks/<?= $task->getId() ?>/assignments/<?= $assignee->getId() ?>/delete" method="POST">
+                            <button type="submit" class="btn btn-danger badge rounded-pill">Delete</button>
+                        </form>
+                    </li>
+                <?php endforeach ?>
+
+            </ul>
+        </div>
+    </div>
+</div>
 <?php
 $content = ob_get_clean();
 include "./App/Views/Common/Layout.php";

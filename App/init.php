@@ -13,6 +13,7 @@ spl_autoload_register(function ($className) {
         "./App/Core/",
         "./App/DTO/Project/",
         "./App/DTO/Task/",
+        "./App/DTO/UserTask/",
         "./App/DTO/Timesheet/",
         "./App/DTO/TimesheetCell/",
         "./App/DTO/TimesheetLine/",

@@ -52,8 +52,9 @@ class UserController extends Controller
         exit();
     }
 
-    public function update()
+    public function update($userId)
     {
+        //todo secure roles and authorization
         switch ($_POST["action"]) {
             case "change-password":
                 $this->userService->updatePassword($_POST["email"], $_POST["currentPassword"], $_POST["newPassword"]);

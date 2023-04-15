@@ -1,7 +1,7 @@
 <?php
 class ViewTaskDTO
 {
-    private string $id;
+    private int $id;
     private string $name;
     private string $description;
     private int $projectId;
@@ -10,7 +10,7 @@ class ViewTaskDTO
 
     public function __construct(Task $task, array $assignees)
     {
-        $this->id = $task->getID();
+        $this->id = $task->getId();
         $this->name = $task->getName();
         $this->description = $task->getDescription();
         //TODO expand? not necessary because user flow, no place in app where you have task and not the project, maybe timesheet?
@@ -19,7 +19,7 @@ class ViewTaskDTO
         $this->assignees = $assignees;
     }
 
-    public function getID()
+    public function getId()
     {
         return $this->id;
     }

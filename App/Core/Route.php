@@ -35,6 +35,10 @@ class Route
         }
 
         http_response_code(404);
+        echo  $url;
+        echo    "<br>";
+        echo $method;
+        echo    "<br>";
         echo "404 Not Found";
     }
 }
@@ -75,7 +79,6 @@ class RouteItem
     public function execute()
     {
         if ($this->authRequired && !isset($_SESSION["user"])) {
-
             header("Location: /ProjectManager/auth/sign-in");
             exit();
         }

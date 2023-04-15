@@ -21,6 +21,19 @@ class UserTaskRepository
         }
     }
 
+    public function getByUserIdTaskId(int $userId, int $taskId)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM users_tasks WHERE user_id = ? AND task_id = ?");
+        $stmt->execute([$userId, $taskId]);
+        $row = $stmt->fetch();
+
+        if ($row) {
+            return new UserTask($row["id"], $row["user_id"], $row["task_id"]);
+        } else {
+            return null;
+        }
+    }
+
     public function getAllByTaskId(int $taskId)
     {
         $stmt = $this->db->prepare("SELECT * FROM users_tasks WHERE task_id = ?");

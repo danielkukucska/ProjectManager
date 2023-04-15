@@ -14,9 +14,9 @@ class ProjectController extends Controller
         $this->view("project/index", ["projects" => $projects]);
     }
 
-    public function show($id)
+    public function show($projectId)
     {
-        $project = $this->projectService->getById($id);
+        $project = $this->projectService->getById($projectId);
         $this->view("project/view", ["project" => $project]);
     }
 
@@ -52,22 +52,22 @@ class ProjectController extends Controller
         exit();
     }
 
-    public function edit($id)
+    public function edit($projectId)
     {
-        $project = $this->projectService->getById($id);
+        $project = $this->projectService->getById($projectId);
         $users = $this->projectService->getUsers();
         $this->view("project/update", ["project" => $project, "users" => $users]);
     }
 
-    public function update($id)
+    public function update($projectId)
     {
         $data = new UpdateProjectDTO($_POST["name"], $_POST["description"], new DateTime($_POST["startDate"]), new DateTime($_POST["endDate"]), $_POST["ownerId"]);
-        $project = $this->projectService->update($id, $data);
+        $project = $this->projectService->update($projectId, $data);
         header("Location: " . $project->getId());
         exit();
     }
 
-    public function destroy($id)
+    public function destroy($projectId)
     {
         throw new Error("Not implemented");
         //$this->projectService->deleteProject($id);

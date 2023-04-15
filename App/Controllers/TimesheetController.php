@@ -15,9 +15,9 @@ class TimesheetController extends Controller
         $this->view("timesheet/index", ["timesheets" => $timesheets]);
     }
 
-    public function show($id)
+    public function show($timesheetId)
     {
-        $timesheet = $this->timesheetService->getById($id);
+        $timesheet = $this->timesheetService->getById($timesheetId);
         if ($timesheet === null) {
             echo "Timesheet not found";
         } else {
@@ -45,20 +45,20 @@ class TimesheetController extends Controller
         exit();
     }
 
-    public function edit($id)
+    public function edit($timesheetId)
     {
-        $timesheet = $this->timesheetService->getById($id);
+        $timesheet = $this->timesheetService->getById($timesheetId);
         // render a view with a form to edit the timesheet
     }
 
-    public function update($id)
+    public function update($timesheetId)
     {
         $data = $_POST;
         // $this->timesheetService->update($id, $data);
         // redirect to the timesheet"s show page
     }
 
-    public function destroy($id)
+    public function destroy($timesheetId)
     {
         throw new Error("Not implemented");
         //$this->timesheetService->deleteTimesheet($id);
