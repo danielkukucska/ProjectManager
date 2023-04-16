@@ -24,7 +24,7 @@ class ViewTimesheetCellDTO
         return $this->timesheetLineId;
     }
 
-    public function getHours()
+    public function getHoursWorked()
     {
         return $this->hoursWorked;
     }

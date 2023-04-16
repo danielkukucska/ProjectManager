@@ -42,7 +42,6 @@ class TaskService
         }
 
         $userTasks = $this->userTaskRepository->getAllByTaskId($task->getId());
-        print_r($userTasks);
         $assignees = [];
         foreach ($userTasks as $userTask) {
             $assignee = $this->userRepository->getById($userTask->getUserId());

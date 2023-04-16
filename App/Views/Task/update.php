@@ -26,7 +26,7 @@ ob_start();
 
         <div class="mb-3">
             <label for="status" class="form-label">Status</label>
-            <select class="form-select" aria-label="Default select example" id="status" name="status">
+            <select class="form-select" id="status" name="status">
                 <option value="TO DO" <?= $task->getStatus() == "TO DO" ? "selected" : "" ?>>TO DO</option>;
                 <option value="In Progress" <?= $task->getStatus() == "In Progress" ? "selected" : "" ?>>In Progress</option>;
                 <option value="Done" <?= $task->getStatus() == "Done" ? "selected" : "" ?>>Done</option>;

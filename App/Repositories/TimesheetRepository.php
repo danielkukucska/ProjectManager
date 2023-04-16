@@ -11,14 +11,13 @@ class TimesheetRepository
 
     public function getAllByUserId(int $userId)
     {
-
         $stmt = $this->db->prepare("SELECT * FROM timesheets WHERE user_id = ?");
         $stmt->execute([$userId]);
         $rows = $stmt->fetchAll();
 
         $timesheets = [];
         foreach ($rows as $row) {
-            $timesheet = new Timesheet($row["id"], $row["user_id"], $row["start_date"], $row["end_date"]);
+            $timesheet = new Timesheet($row["id"], $row["user_id"], new DateTime($row["start_date"]), new DateTime($row["end_date"]));
             $timesheets[] = $timesheet;
         }
 
@@ -32,7 +31,7 @@ class TimesheetRepository
         $row = $stmt->fetch();
 
         if ($row) {
-            return new Timesheet($row["id"], $row["user_id"], $row["start_date"], $row["end_date"]);
+            return new Timesheet($row["id"], $row["user_id"], new DateTime($row["start_date"]), new DateTime($row["end_date"]));
         } else {
             return null;
         }
@@ -42,10 +41,10 @@ class TimesheetRepository
     {
         if ($timesheet->getId()) {
             $stmt = $this->db->prepare("UPDATE timesheets SET user_id = ?, start_date = ?, end_date = ? WHERE id = ?");
-            $stmt->execute([$timesheet->getUserId(), $timesheet->getStartDate(), $timesheet->getEndDate(), $timesheet->getId()]);
+            $stmt->execute([$timesheet->getUserId(), $timesheet->getStartDate()->format("Y-m-d"), $timesheet->getEndDate()->format("Y-m-d"), $timesheet->getId()]);
         } else {
             $stmt = $this->db->prepare("INSERT INTO timesheets (user_id, start_date,end_date) VALUES (?, ?, ?)");
-            $stmt->execute([$timesheet->getUserId(), $timesheet->getStartDate(), $timesheet->getEndDate()]);
+            $stmt->execute([$timesheet->getUserId(), $timesheet->getStartDate()->format("Y-m-d"), $timesheet->getEndDate()->format("Y-m-d")]);
 
             $timesheet->setId($this->db->lastInsertId());
         }

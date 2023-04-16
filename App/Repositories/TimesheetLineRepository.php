@@ -16,7 +16,7 @@ class TimesheetLineRepository
         $row = $stmt->fetch();
 
         if ($row) {
-            return new TimesheetLine($row["id"], $row["timesheet_id"], $row["task_id"], $row["hours"]);
+            return new TimesheetLine($row["id"], $row["timesheet_id"], $row["task_id"]);
         } else {
             return null;
         }
@@ -31,7 +31,7 @@ class TimesheetLineRepository
         $timesheetLines = [];
 
         foreach ($rows as $row) {
-            $timesheetLines[] = new TimesheetLine($row["id"], $row["timesheet_id"], $row["task_id"], $row["hours"]);
+            $timesheetLines[] = new TimesheetLine($row["id"], $row["timesheet_id"], $row["task_id"]);
         }
 
         return $timesheetLines;

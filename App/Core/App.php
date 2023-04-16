@@ -42,6 +42,8 @@ class App
 
         Route::post("/timesheets", "TimesheetController@store", true);
         Route::post("/timesheets/{timesheetId}", "TimesheetController@update", true);
+        Route::post("/timesheets/{timesheetId}/timesheetlines", "TimesheetController@createTimesheetLine", true);
+        Route::post("/timesheets/{timesheetId}/timesheetlines/update", "TimesheetController@updateTimesheetLine", true);
         Route::post("/timesheets/{timesheetId}/delete", "TimesheetController@destroy", true);
 
         //ath

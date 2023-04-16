@@ -19,8 +19,8 @@ class TimesheetCellRepository
             return new TimesheetCell(
                 $row["id"],
                 $row["timesheet_line_id"],
-                $row["date"],
-                $row["hours"]
+                $row["hours_worked"],
+                new DateTime($row["date"])
             );
         } else {
             return null;
@@ -37,8 +37,8 @@ class TimesheetCellRepository
             $cells[] = new TimesheetCell(
                 $row["id"],
                 $row["timesheet_line_id"],
-                $row["date"],
-                $row["hours"]
+                $row["hours_worked"],
+                new DateTime($row["date"])
             );
         }
 
@@ -48,11 +48,11 @@ class TimesheetCellRepository
     public function save(TimesheetCell $cell)
     {
         if ($cell->getId()) {
-            $stmt = $this->db->prepare("UPDATE timesheet_cells SET timesheet_line_id = ?, date = ?, hours = ? WHERE id = ?");
-            $stmt->execute([$cell->getTimesheetLineId(), $cell->getDate(), $cell->getHoursWorked(), $cell->getId()]);
+            $stmt = $this->db->prepare("UPDATE timesheet_cells SET timesheet_line_id = ?, date = ?, hours_worked = ? WHERE id = ?");
+            $stmt->execute([$cell->getTimesheetLineId(), $cell->getDate()->format("Y-m-d"), $cell->getHoursWorked(), $cell->getId()]);
         } else {
-            $stmt = $this->db->prepare("INSERT INTO timesheet_cells (timesheet_line_id, date, hours) VALUES (?, ?, ?)");
-            $stmt->execute([$cell->getTimesheetLineId(), $cell->getDate(), $cell->getHoursWorked()]);
+            $stmt = $this->db->prepare("INSERT INTO timesheet_cells (timesheet_line_id, date, hours_worked) VALUES (?, ?, ?)");
+            $stmt->execute([$cell->getTimesheetLineId(), $cell->getDate()->format("Y-m-d"), $cell->getHoursWorked()]);
 
             $cell->setId($this->db->lastInsertId());
         }

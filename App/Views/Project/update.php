@@ -40,7 +40,7 @@ ob_start();
 
         <div class="mb-3">
             <label for="ownerId" class="form-label">Owner</label>
-            <select class="form-select" aria-label="Default select example" id="ownerId" name="ownerId">
+            <select class="form-select" id="ownerId" name="ownerId">
                 <option>No owner selected...</option>
                 <?php foreach ($data["users"] as $user) : ?>
                     <option <?= ($user->getId() == $project->getOwner()->getId()) ? "selected" : "" ?> value="<?= $user->getId() ?>"><?= $user->getName() ?> - <?= $user->getEmail() ?></option>;

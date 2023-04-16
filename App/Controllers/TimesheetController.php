@@ -5,13 +5,22 @@ class TimesheetController extends Controller
 
     public function __construct()
     {
-        $this->timesheetService = $this->init(["TimesheetRepository", "TimesheetLineRepository", "TimesheetCellRepository"], "TimesheetService");
+        $this->timesheetService = $this->init(
+            [
+                "TimesheetRepository",
+                "TimesheetLineRepository",
+                "TimesheetCellRepository",
+                "UserTaskRepository",
+                "TaskRepository",
+                "ProjectRepository"
+            ],
+            "TimesheetService"
+        );
     }
 
     public function index()
     {
-        //TODO auth and get user ID
-        $timesheets = $this->timesheetService->getAllByUserId(1);
+        $timesheets = $this->timesheetService->getAllByUserId($_SESSION["user"]->getId());
         $this->view("timesheet/index", ["timesheets" => $timesheets]);
     }
 
@@ -22,9 +31,8 @@ class TimesheetController extends Controller
             echo "Timesheet not found";
         } else {
 
-            echo "TASK: " . print_r($timesheet) . "<br>";
+            $this->view("timesheet/view", ["timesheet" => $timesheet]);
         }
-        $this->view("timesheet/view", ["timesheet" => $timesheet]);
     }
 
     public function create()
@@ -34,21 +42,44 @@ class TimesheetController extends Controller
 
     public function store()
     {
-
-        // $data = $_POST;
-        $data = new CreateTimesheetDTO(1, new DateTime(), new DateTime());
-        // $data = new CreateTimesheetDTO($_POST["name"], $_POST["description"], $_POST["startDate"], $_POST["endDate"], $_POST["ownerId"]);
+        $selectedDate =  strtotime($_POST["selectedDate"]);
+        $startDate = date('Y-m-d', strtotime('monday this week', $selectedDate));
+        $endDate = date('Y-m-d', strtotime('sunday this week', $selectedDate));
+        $data = new CreateTimesheetDTO($_SESSION["user"]->getId(), new DateTime($startDate), new DateTime($endDate));
         $timesheet = $this->timesheetService->create($data);
-        echo print_r($timesheet);
-        // redirect to the timesheet"s show page
-        header("Location: timesheets/" . $timesheet->getId());
+        header("Location: timesheets/" . $timesheet->getId() . "/edit");
+        exit();
+    }
+
+    public function createTimesheetLine($timesheetId)
+    {
+        $data = new CreateTimesheetLineDTO($timesheetId, $_POST["taskId"]);
+        $this->timesheetService->createTimesheetLine($data);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit();
+    }
+
+    public function updateTimesheetLine($timesheetId)
+    {
+        $data = [];
+        foreach ($_POST as $id => $hoursWorked) {
+            $timesheetCell = new UpdateTimesheetCellDTO($id, $hoursWorked);
+            $data[] = $timesheetCell;
+        }
+        $this->timesheetService->updateTimesheetLine($data);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
         exit();
     }
 
     public function edit($timesheetId)
     {
         $timesheet = $this->timesheetService->getById($timesheetId);
-        // render a view with a form to edit the timesheet
+        $tasks = $this->timesheetService->getUserTasks();
+        if ($timesheet === null) {
+            echo "Timesheet not found";
+        } else {
+            $this->view("timesheet/update", ["timesheet" => $timesheet, "tasks" => $tasks]);
+        }
     }
 
     public function update($timesheetId)
