@@ -5,6 +5,64 @@ $tasks = $data["tasks"];
 $pageTitle = "Update Timesheet";
 ob_start();
 ?>
+<script src="https://cdn.jsdelivr.net/npm/zod@3.21.4/lib/index.umd.min.js "></script>
+<script src="/ProjectManager/Public/js/formValidator.js"></script>
+<script>
+    function validateCreateTimesheetLine(event) {
+        const createTimesheetLineDTOSchema = Zod.object({
+            taskId: Zod.string().transform((val, ctx) => {
+                const parsed = parseInt(val);
+                if (isNaN(parsed)) {
+                    ctx.addIssue({
+                        code: Zod.ZodIssueCode.custom,
+                        message: "Not a number",
+                    });
+                    return Zod.NEVER;
+                }
+                return parsed;
+            })
+        }).strict();
+
+        const formData = Object.fromEntries(new FormData(event.target));
+
+        return validateForm(formData, createTimesheetLineDTOSchema);
+    }
+
+    function validateUpdateTimesheetLine(event) {
+        const updateTimesheetLineDTOSchema = Zod.record(Zod.string().transform((val, ctx) => {
+            const parsed = parseInt(val);
+            if (isNaN(parsed)) {
+                ctx.addIssue({
+                    code: Zod.ZodIssueCode.custom,
+                    message: "Not a number",
+                });
+                return Zod.NEVER;
+            }
+            return parsed;
+        }), Zod.string().transform((val, ctx) => {
+            const parsed = parseInt(val);
+            if (isNaN(parsed)) {
+                ctx.addIssue({
+                    code: Zod.ZodIssueCode.custom,
+                    message: "Not a number",
+                });
+                return Zod.NEVER;
+            }
+            if (parsed < 0 || parsed > 12) {
+                ctx.addIssue({
+                    code: Zod.ZodIssueCode.custom,
+                    message: "Hours must be between 0 and 12",
+                });
+                return Zod.NEVER;
+            }
+            return parsed;
+        }));
+
+        const formData = Object.fromEntries(new FormData(event.target));
+
+        return validateForm(formData, updateTimesheetLineDTOSchema);
+    }
+</script>
 <div class="container p-0 my-3 rounded-3 border shadow-md">
     <div class="row p-4 align-items-center justify-content-between">
         <div class="col-md-7 p-3">
@@ -18,9 +76,9 @@ ob_start();
 </div>
 
 <div class="container my-3 p-0 rounded-3 border shadow-md table-responsive">
-    <form method="POST" id="createTimesheetLine" action="/Projectmanager/timesheets/<?= $timesheet->getId() ?>/timesheetlines"></form>
+    <form method="POST" id="createTimesheetLine" action="/Projectmanager/timesheets/<?= $timesheet->getId() ?>/timesheetlines" onsubmit="return validateCreateTimesheetLine(event)"></form>
     <!-- nyehh -->
-    <form method="POST" id="updateTimesheetLine" action="/Projectmanager/timesheets/<?= $timesheet->getId() ?>/timesheetlines/update"></form>
+    <form method="POST" id="updateTimesheetLine" action="/Projectmanager/timesheets/<?= $timesheet->getId() ?>/timesheetlines/update" onsubmit="return validateUpdateTimesheetLine(event)"></form>
     <table class="table table-striped table-dark mb-0">
         <thead>
             <tr>
@@ -33,7 +91,6 @@ ob_start();
                 <th><?= $timesheet->getStartDate()->modify("friday this week")->format("Y-m-d") ?></th>
                 <th><?= $timesheet->getStartDate()->modify("saturday this week")->format("Y-m-d") ?></th>
                 <th><?= $timesheet->getStartDate()->modify("sunday this week")->format("Y-m-d") ?></th>
-                <th>Action</th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -43,12 +100,9 @@ ob_start();
                     <td><?= ($timesheetLine->getTaskName()) ?></td>
                     <?php foreach ($timesheetLine->getTimesheetCells() as $timesheetCell) : ?>
                         <td>
-                            <input class="form-control" type="number" min="0" name="<?= $timesheetCell->getId() ?>" value="<?= ($timesheetCell->getHoursWorked()) ?>" form="updateTimesheetLine">
+                            <input class="form-control" type="number" min="0" id="<?= $timesheetCell->getId() ?>" name="<?= $timesheetCell->getId() ?>" value="<?= ($timesheetCell->getHoursWorked()) ?>" form="updateTimesheetLine">
                         </td>
                     <?php endforeach; ?>
-                    <td>
-                        <input class="form-control" type="submit" value="Update" form="updateTimesheetLine" />
-                    </td>
                 </tr>
             <?php endforeach; ?>
             <tr>
@@ -60,9 +114,10 @@ ob_start();
                         <?php endforeach; ?>
                     </select>
                 </td>
-                <td colspan="7"></td>
+                <td colspan="5"></td>
 
-                <td><input class="form-control" type="submit" value="Save" form="createTimesheetLine" /></td>
+                <td><input class="form-control" type="submit" value="Add Task" form="createTimesheetLine" /></td>
+                <td><input class="form-control" type="submit" value="Save Changes" form="updateTimesheetLine" /></td>
             </tr>
         </tbody>
     </table>

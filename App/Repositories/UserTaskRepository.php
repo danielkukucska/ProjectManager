@@ -51,7 +51,6 @@ class UserTaskRepository
 
     public function getAllByUserId(int $userId, int $exlcudeByTimesheetId = null)
     {
-        echo $exlcudeByTimesheetId;
         $userTasks = [];
         if ($exlcudeByTimesheetId == null) {
             $stmt = $this->db->prepare("SELECT * FROM users_tasks WHERE user_id = ?");
@@ -64,7 +63,6 @@ class UserTaskRepository
 
        
         foreach ($rows as $row) {
-            echo print_r($row);
             $userTask = new UserTask($row["id"], $row["user_id"], $row["task_id"]);
             $userTasks[] = $userTask;
         }

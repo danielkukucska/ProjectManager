@@ -37,6 +37,10 @@ body > nav + * {
 	margin-top: var(--scroll--offset-negative);
 }
 
+.error{
+	border: 2px solid red;
+}
+
 @media (min-width: 992px) {
 	.offcanvas {
 		visibility: visible;
