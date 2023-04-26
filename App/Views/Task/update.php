@@ -49,7 +49,7 @@ ob_start();
             <h2 class="mb-3 anchor">Assignees</h2>
             <ul class="list-group">
                 <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <form class="d-flex gap-3 justify-content-between w-100" action="/Projectmanager/projects/<?= $project->getId() ?>/tasks/<?= $task->getId() ?>/assignments" method="POST">
+                    <form class="d-flex gap-3 justify-content-between w-100" action="/Projectmanager/projects/<?= $project->getId() ?>/tasks/<?= $task->getId() ?>/assignments" method="POST" onsubmit="return validateAddAssignee(event)">
                         <select class="form-select" id="userId" name="userId">
                             <option selected>Add assignee</option>
                             <?php foreach ($data["users"] as $user) : ?>

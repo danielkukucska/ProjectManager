@@ -10,4 +10,24 @@ function validateUpdateTask(event) {
     return validateForm(formData, updateTaskDTOSchema);
   }
 
+  function validateAddAssignee(event) {
+    const addAssigneeDTOSchema = Zod.object({
+        userId: Zod.string().transform((val, ctx) => {
+        const parsed = parseInt(val);
+        if (isNaN(parsed)) {
+          ctx.addIssue({
+            code: Zod.ZodIssueCode.custom,
+            message: "Not a number",
+          });
+          return Zod.NEVER;
+        }
+        return parsed;
+      })
+    }).strict();
+  
+    const formData = Object.fromEntries(new FormData(event.target));
+  
+    return validateForm(formData, addAssigneeDTOSchema);
+  }
+
   
