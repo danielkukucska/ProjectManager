@@ -77,9 +77,9 @@ class TimesheetService
         return new ViewTimesheetDTO($timesheet, []);
     }
 
-    public function getUserTasks()
+    public function getUserTasks(int $timesheetId = null)
     {
-        $userTasks = $this->userTaskRepository->getAllByUserId($_SESSION["user"]->getId());
+        $userTasks = $this->userTaskRepository->getAllByUserId($_SESSION["user"]->getId(),$timesheetId);       
         $taskDTOs = [];
 
         foreach ($userTasks as $userTask) {

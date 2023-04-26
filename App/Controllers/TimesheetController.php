@@ -51,6 +51,26 @@ class TimesheetController extends Controller
         exit();
     }
 
+    public function edit($timesheetId)
+    {
+        $timesheet = $this->timesheetService->getById($timesheetId);
+        $tasks = $this->timesheetService->getUserTasks($timesheetId);
+        // echo print_r($tasks);
+        // return;
+        if ($timesheet === null) {
+            echo "Timesheet not found";
+        } else {
+            $this->view("timesheet/update", ["timesheet" => $timesheet, "tasks" => $tasks]);
+        }
+    }
+
+    public function update($timesheetId)
+    {
+        $data = $_POST;
+        // $this->timesheetService->update($id, $data);
+        // redirect to the timesheet"s show page
+    }
+
     public function createTimesheetLine($timesheetId)
     {
         $data = new CreateTimesheetLineDTO($timesheetId, $_POST["taskId"]);
@@ -69,24 +89,6 @@ class TimesheetController extends Controller
         $this->timesheetService->updateTimesheetLine($data);
         header('Location: ' . $_SERVER['HTTP_REFERER']);
         exit();
-    }
-
-    public function edit($timesheetId)
-    {
-        $timesheet = $this->timesheetService->getById($timesheetId);
-        $tasks = $this->timesheetService->getUserTasks();
-        if ($timesheet === null) {
-            echo "Timesheet not found";
-        } else {
-            $this->view("timesheet/update", ["timesheet" => $timesheet, "tasks" => $tasks]);
-        }
-    }
-
-    public function update($timesheetId)
-    {
-        $data = $_POST;
-        // $this->timesheetService->update($id, $data);
-        // redirect to the timesheet"s show page
     }
 
     public function destroy($timesheetId)
