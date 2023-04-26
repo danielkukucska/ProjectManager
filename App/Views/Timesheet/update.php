@@ -7,62 +7,8 @@ ob_start();
 ?>
 <script src="https://cdn.jsdelivr.net/npm/zod@3.21.4/lib/index.umd.min.js "></script>
 <script src="/ProjectManager/Public/js/formValidator.js"></script>
-<script>
-    function validateCreateTimesheetLine(event) {
-        const createTimesheetLineDTOSchema = Zod.object({
-            taskId: Zod.string().transform((val, ctx) => {
-                const parsed = parseInt(val);
-                if (isNaN(parsed)) {
-                    ctx.addIssue({
-                        code: Zod.ZodIssueCode.custom,
-                        message: "Not a number",
-                    });
-                    return Zod.NEVER;
-                }
-                return parsed;
-            })
-        }).strict();
+<script src="/ProjectManager/Public/js/timesheet/updateTimesheet.js"></script>
 
-        const formData = Object.fromEntries(new FormData(event.target));
-
-        return validateForm(formData, createTimesheetLineDTOSchema);
-    }
-
-    function validateUpdateTimesheetLine(event) {
-        const updateTimesheetLineDTOSchema = Zod.record(Zod.string().transform((val, ctx) => {
-            const parsed = parseInt(val);
-            if (isNaN(parsed)) {
-                ctx.addIssue({
-                    code: Zod.ZodIssueCode.custom,
-                    message: "Not a number",
-                });
-                return Zod.NEVER;
-            }
-            return parsed;
-        }), Zod.string().transform((val, ctx) => {
-            const parsed = parseInt(val);
-            if (isNaN(parsed)) {
-                ctx.addIssue({
-                    code: Zod.ZodIssueCode.custom,
-                    message: "Not a number",
-                });
-                return Zod.NEVER;
-            }
-            if (parsed < 0 || parsed > 12) {
-                ctx.addIssue({
-                    code: Zod.ZodIssueCode.custom,
-                    message: "Hours must be between 0 and 12",
-                });
-                return Zod.NEVER;
-            }
-            return parsed;
-        }));
-
-        const formData = Object.fromEntries(new FormData(event.target));
-
-        return validateForm(formData, updateTimesheetLineDTOSchema);
-    }
-</script>
 <div class="container p-0 my-3 rounded-3 border shadow-md">
     <div class="row p-4 align-items-center justify-content-between">
         <div class="col-md-7 p-3">
