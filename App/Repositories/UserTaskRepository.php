@@ -49,18 +49,25 @@ class UserTaskRepository
         return $userTasks;
     }
 
-    public function getAllByUserId(int $userId)
+    public function getAllByUserId(int $userId, int $exlcudeByTimesheetId = null)
     {
-        $stmt = $this->db->prepare("SELECT * FROM users_tasks WHERE user_id = ?");
-        $stmt->execute([$userId]);
+        echo $exlcudeByTimesheetId;
+        $userTasks = [];
+        if ($exlcudeByTimesheetId == null) {
+            $stmt = $this->db->prepare("SELECT * FROM users_tasks WHERE user_id = ?");
+            $stmt->execute([$userId]);
+        } else {
+            $stmt = $this->db->prepare("SELECT ut.* FROM users_tasks ut LEFT JOIN timesheet_lines tl ON ut.task_id = tl.task_id AND tl.timesheet_id = ? WHERE ut.user_id = ? AND tl.id IS NULL");
+            $stmt->execute([$exlcudeByTimesheetId, $userId]);
+        }
         $rows = $stmt->fetchAll();
 
-        $userTasks = [];
+       
         foreach ($rows as $row) {
+            echo print_r($row);
             $userTask = new UserTask($row["id"], $row["user_id"], $row["task_id"]);
             $userTasks[] = $userTask;
         }
-
         return $userTasks;
     }
 
