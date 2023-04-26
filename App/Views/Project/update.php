@@ -3,12 +3,16 @@ $project = $data["project"];
 $pageTitle = "Update Project - " . $project->getName();
 ob_start();
 ?>
+<script src="https://cdn.jsdelivr.net/npm/zod@3.21.4/lib/index.umd.min.js "></script>
+<script src="/ProjectManager/Public/js/formValidator.js"></script>
+<script src="/ProjectManager/Public/js/project/updateProject.js"></script>
+
 <div class="container p-4 my-3 rounded-3 border shadow-md">
     <h1 class="display-4 fw-bold lh-1">Update Project</h1>
 </div>
 
 <div class="container my-3 p-0 rounded-3 border shadow-md">
-    <form class="row g-3 p-3" action="/ProjectManager/projects/<?= $project->getId() ?>" method="POST">
+    <form class="row g-3 p-3" action="/ProjectManager/projects/<?= $project->getId() ?>" method="POST" onsubmit="return validateUpdateProject(event)">
         <div class="mb-3">
             <label class="form-label" for="name">
                 Project Name

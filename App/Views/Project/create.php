@@ -2,13 +2,16 @@
 $pageTitle = "Create Project";
 ob_start();
 ?>
+<script src="https://cdn.jsdelivr.net/npm/zod@3.21.4/lib/index.umd.min.js "></script>
+<script src="/ProjectManager/Public/js/formValidator.js"></script>
+<script src="/ProjectManager/Public/js/project/createProject.js"></script>
 
 <div class="container p-4 my-3 rounded-3 border shadow-md">
     <h1 class="display-4 fw-bold lh-1">Create Project</h1>
 </div>
 
 <div class="container my-3 p-0 rounded-3 border shadow-md">
-    <form class="row g-3 p-3" action="/Projectmanager/projects" method="POST">
+    <form class="row g-3 p-3" action="/Projectmanager/projects" method="POST" onsubmit="return validateCreateProject(event)">
         <div class="mb-3">
             <label class="form-label" for="name">
                 Project Name
