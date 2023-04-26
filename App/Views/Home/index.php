@@ -17,8 +17,8 @@ ob_start();
     <div class="col-md-4 card p-0">
         <h5 class="card-header">Projects</h5>
         <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <h5 class="card-title">todo</h5>
+            <p class="card-text">todo</p>
             <a href="/ProjectManager/projects" class="btn btn-primary">Go</a>
         </div>
     </div>
