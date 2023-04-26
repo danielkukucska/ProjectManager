@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Register";
+$pageTitle = "Sign In";
 ob_start();
 ?>
 <div class="container p-4 my-3 rounded-3 border shadow-md">

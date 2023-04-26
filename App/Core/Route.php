@@ -35,11 +35,9 @@ class Route
         }
 
         http_response_code(404);
-        echo  $url;
-        echo    "<br>";
-        echo $method;
-        echo    "<br>";
-        echo "404 Not Found";
+        echo "We are sorry but there is nothing here: " . $url;
+        echo "<br>";
+        echo "Method: " . $method;
     }
 }
 

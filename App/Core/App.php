@@ -10,6 +10,10 @@ class App
         session_start();
 
         // Define routes
+
+        //home
+        Route::get("", "HomeController@index", false);
+        
         //projects
         Route::get("/projects", "ProjectController@index", true);
         Route::get("/projects/create", "ProjectController@create", true);
