@@ -60,7 +60,6 @@ class UserController extends Controller
                 $this->userService->updatePassword($_POST["email"], $_POST["currentPassword"], $_POST["newPassword"]);
                 header("Location: /Projectmanager/auth");
                 exit();
-                break;
             case "promote":
                 $this->userService->promoteUser($_POST["userId"], $_SESSION["user"]->getId());
                 break;

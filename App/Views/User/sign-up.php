@@ -5,9 +5,13 @@ ob_start();
 <div class="container p-4 my-3 rounded-3 border shadow-md">
     <h1 class="display-4 fw-bold lh-1">Sign Up</h1>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/zod@3.21.4/lib/index.umd.min.js "></script>
+<script src="/ProjectManager/Public/js/formValidator.js"></script>
+<script src="/ProjectManager/Public/js/user/signUp.js"></script>
+
 
 <div class="container my-3 p-0 rounded-3 border shadow-md">
-    <form class="row g-3 p-3" action="/Projectmanager/auth/sign-up" method="POST">
+    <form class="row g-3 p-3" action="/Projectmanager/auth/sign-up" method="POST" onsubmit="return validateSignUp(event)">
         <div class="mb-3">
             <label class="form-label" for="name">
                 Name

@@ -36,7 +36,7 @@ ob_start();
                         <span class="badge bg-primary rounded-pill"><?= $user->getRole() ?></span>
                     </li>
                 </ul>
-                <a class="btn btn-primary" href="./change-password">Change Password</a>
+                <a class="btn btn-primary" href="./auth/change-password">Change Password</a>
             </div>
 
         </div>
