@@ -52,8 +52,8 @@ class UserRepository
     public function save(User $user)
     {
         if ($user->getId()) {
-            $stmt = $this->db->prepare("UPDATE users SET name = ?, email = ?, password = ? WHERE id = ?");
-            $stmt->execute([$user->getName(), $user->getEmail(), $user->getPassword(), $user->getId()]);
+            $stmt = $this->db->prepare("UPDATE users SET name = ?, email = ?, password = ?, role = ? WHERE id = ?");
+            $stmt->execute([$user->getName(), $user->getEmail(), $user->getPassword(),  $user->getRole(), $user->getId()]);
         } else {
             $stmt = $this->db->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
             $stmt->execute([$user->getName(), $user->getEmail(), $user->getPassword()]);

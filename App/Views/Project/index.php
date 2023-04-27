@@ -27,8 +27,7 @@ ob_start();
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <?php
-            foreach ($projects as $project) : ?>
+            <?php foreach ($projects as $project) : ?>
                 <tr>
                     <td>
                         <a class="btn btn-primary" href="./projects/<?= $project->getId() ?>">View</a>

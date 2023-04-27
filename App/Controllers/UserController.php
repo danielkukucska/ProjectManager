@@ -52,9 +52,20 @@ class UserController extends Controller
         exit();
     }
 
-    public function update($userId)
+    public function listUsers()
     {
-        //todo secure roles and authorization
+        $users = $this->userService->getAll();
+        $this->view("user/users-list", ["users" => $users]);
+    }
+
+    public function show(int $userId)
+    {
+        $user = $this->userService->getById($userId);
+        $this->view("user/view", ["user" => $user]);
+    }
+
+    public function update(int $userId)
+    {
         switch ($_POST["action"]) {
             case "change-password":
                 try {
@@ -69,10 +80,12 @@ class UserController extends Controller
                 }
                 exit();
             case "promote":
-                $this->userService->promoteUser($_POST["userId"], $_SESSION["user"]->getId());
+                $this->userService->promoteUser($userId);
+                $this->show($userId);
                 break;
             case "demote":
-                $this->userService->demoteUser($_POST["userId"], $_SESSION["user"]->getId());
+                $this->userService->demoteUser($userId);
+                $this->show($userId);
                 break;
             default:
                 throw new InvalidArgumentException("Invalid update action");

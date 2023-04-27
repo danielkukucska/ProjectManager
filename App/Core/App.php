@@ -12,54 +12,59 @@ class App
         // Define routes
 
         //home
-        Route::get("", "HomeController@index", false);
-        
-        //projects
-        Route::get("/projects", "ProjectController@index", true);
-        Route::get("/projects/create", "ProjectController@create", true);
-        Route::get("/projects/{projectId}", "ProjectController@show", true);
-        Route::get("/projects/{projectId}/edit", "ProjectController@edit", true);
-        Route::get("/projects/{projectId}/delete", "ProjectController@delete", true);
+        Route::get("", "HomeController@index", false, false);
 
-        Route::post("/projects", "ProjectController@store", true);
-        Route::post("/projects/{projectId}", "ProjectController@update", true);
-        Route::post("/projects/{projectId}/delete", "ProjectController@destroy", true);
+        //projects
+        Route::get("/projects", "ProjectController@index", true, false);
+        Route::get("/projects/create", "ProjectController@create", true, false);
+        Route::get("/projects/{projectId}", "ProjectController@show", true, false);
+        Route::get("/projects/{projectId}/edit", "ProjectController@edit", true, false);
+        Route::get("/projects/{projectId}/delete", "ProjectController@delete", true, false);
+
+        Route::post("/projects", "ProjectController@store", true, false);
+        Route::post("/projects/{projectId}", "ProjectController@update", true, false);
+        Route::post("/projects/{projectId}/delete", "ProjectController@destroy", true, false);
 
         //tasks
-        Route::get("/projects/{projectId}/tasks", "TaskController@index", true);
-        Route::get("/projects/{projectId}/tasks/create", "TaskController@create", true);
-        Route::get("/projects/{projectId}/tasks/{taskId}", "TaskController@show", true);
-        Route::get("/projects/{projectId}/tasks/{taskId}/edit", "TaskController@edit", true);
-        Route::get("/projects/{projectId}/tasks/{taskId}/delete", "TaskController@delete", true);
+        Route::get("/projects/{projectId}/tasks", "TaskController@index", true, false);
+        Route::get("/projects/{projectId}/tasks/create", "TaskController@create", true, false);
+        Route::get("/projects/{projectId}/tasks/{taskId}", "TaskController@show", true, false);
+        Route::get("/projects/{projectId}/tasks/{taskId}/edit", "TaskController@edit", true, false);
+        Route::get("/projects/{projectId}/tasks/{taskId}/delete", "TaskController@delete", true, false);
 
-        Route::post("/projects/{projectId}/tasks", "TaskController@store", true);
-        Route::post("/projects/{projectId}/tasks/{taskId}", "TaskController@update", true);
-        Route::post("/projects/{projectId}/tasks/{taskId}/assignments", "TaskController@addAssignment", true);
-        Route::post("/projects/{projectId}/tasks/{taskId}/assignments/{userId}/delete", "TaskController@removeAssignment", true);
-        Route::post("/projects/{projectId}/tasks/{taskId}/delete", "TaskController@destroy", true);
+        Route::post("/projects/{projectId}/tasks", "TaskController@store", true, false);
+        Route::post("/projects/{projectId}/tasks/{taskId}", "TaskController@update", true, false);
+        Route::post("/projects/{projectId}/tasks/{taskId}/assignments", "TaskController@addAssignment", true, false);
+        Route::post("/projects/{projectId}/tasks/{taskId}/assignments/{userId}/delete", "TaskController@removeAssignment", true, false);
+        Route::post("/projects/{projectId}/tasks/{taskId}/delete", "TaskController@destroy", true, false);
 
         //timesheets
-        Route::get("/timesheets", "TimesheetController@index", true);
-        Route::get("/timesheets/create", "TimesheetController@create", true);
-        Route::get("/timesheets/{timesheetId}", "TimesheetController@show", true);
-        Route::get("/timesheets/{timesheetId}/edit", "TimesheetController@edit", true);
+        Route::get("/timesheets", "TimesheetController@index", true, false);
+        Route::get("/timesheets/create", "TimesheetController@create", true, false);
+        Route::get("/timesheets/{timesheetId}", "TimesheetController@show", true, false);
+        Route::get("/timesheets/{timesheetId}/edit", "TimesheetController@edit", true, false);
 
-        Route::post("/timesheets", "TimesheetController@store", true);
-        Route::post("/timesheets/{timesheetId}", "TimesheetController@update", true);
-        Route::post("/timesheets/{timesheetId}/timesheetlines", "TimesheetController@createTimesheetLine", true);
-        Route::post("/timesheets/{timesheetId}/timesheetlines/update", "TimesheetController@updateTimesheetLine", true);
-        Route::post("/timesheets/{timesheetId}/delete", "TimesheetController@destroy", true);
+        Route::post("/timesheets", "TimesheetController@store", true, false);
+        Route::post("/timesheets/{timesheetId}", "TimesheetController@update", true, false);
+        Route::post("/timesheets/{timesheetId}/timesheetlines", "TimesheetController@createTimesheetLine", true, false);
+        Route::post("/timesheets/{timesheetId}/timesheetlines/update", "TimesheetController@updateTimesheetLine", true, false);
+        Route::post("/timesheets/{timesheetId}/delete", "TimesheetController@destroy", true, false);
 
-        //ath
-        Route::get("/auth", "UserController@index", true);
-        Route::get("/auth/sign-up", "UserController@signUp", false);
-        Route::get("/auth/sign-in", "UserController@signIn", false);
-        Route::get("/auth/sign-out", "UserController@signOut", true);
-        Route::get("/auth/change-password", "UserController@changePassword", true);
+        //users
+        Route::get("/users", "UserController@listUsers", true, true);
+        Route::get("/users/{userId}", "UserController@show", true, true);
+        Route::post("/users/{userId}/update", "UserController@update", true, false);
 
-        Route::post("/auth/sign-in", "UserController@authenticate", false);
-        Route::post("/auth/sign-up", "UserController@store", false);
-        Route::post("/auth/{userId}/update", "UserController@update", true);
+
+        //auth
+        Route::get("/auth", "UserController@index", true, false);
+        Route::get("/auth/sign-up", "UserController@signUp", false, false);
+        Route::get("/auth/sign-in", "UserController@signIn", false, false);
+        Route::get("/auth/sign-out", "UserController@signOut", true, false);
+        Route::get("/auth/change-password", "UserController@changePassword", true, false);
+
+        Route::post("/auth/sign-in", "UserController@authenticate", false, false);
+        Route::post("/auth/sign-up", "UserController@store", false, false);
 
 
         // Dispatch the request

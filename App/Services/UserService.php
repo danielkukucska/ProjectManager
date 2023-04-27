@@ -49,9 +49,36 @@ class UserService
         $this->userRepository->save($user);
     }
 
-    public function promoteUser(int $userId, string $requestorUserId)
+    public function getAll()
     {
-        $requestorUser = $this->userRepository->getById($requestorUserId);
+        if ($_SESSION["user"]->getRole() != "admin") {
+            throw new UnauthorizedException();
+        }
+
+        $users = $this->userRepository->getAll();
+        $userDTOs = [];
+
+        foreach ($users as $user) {
+            $userDTOs[] = new ViewUserDTO($user);
+        }
+
+        return $userDTOs;
+    }
+
+    public function getById(int $id)
+    {
+        $user = $this->userRepository->getById($id);
+
+        if (!$user) {
+            throw new NotFoundException("User not found.");
+        }
+
+        return new ViewUserDTO($user);
+    }
+
+    public function promoteUser(int $userId)
+    {
+        $requestorUser = $this->userRepository->getById($_SESSION["user"]->getId());
 
         if (!$requestorUser) {
             throw new NotFoundException("User not found");
@@ -68,8 +95,10 @@ class UserService
         $this->userRepository->save($user);
     }
 
-    public function demoteUser(int $userId, string $requestorUserId)
+    public function demoteUser(int $userId)
     {
+        $requestorUserId = $_SESSION["user"]->getId();
+
         if ($userId === $requestorUserId) {
             throw new UnauthorizedException("Can't demote yourself");
         }

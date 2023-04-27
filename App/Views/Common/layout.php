@@ -73,6 +73,14 @@
                                 </ul>
                             </li>
                             <?php if (isset($_SESSION["user"])) : ?>
+                                <?php if ($_SESSION["user"]->getRole() == "admin") : ?>
+                                    <li class="nav-item">
+                                        <a href="/ProjectManager/users" class="nav-link">
+                                            <img class="d-md-block" src="/ProjectManager/Public/images/icons/videos.svg" alt="Videos icon" />
+                                            Users
+                                        </a>
+                                    </li>
+                                <?php endif; ?>
                                 <li class="nav-item">
                                     <a href="/ProjectManager/auth" class="nav-link">
                                         <img class="d-md-block" src="/ProjectManager/Public/images/icons/videos.svg" alt="Videos icon" />

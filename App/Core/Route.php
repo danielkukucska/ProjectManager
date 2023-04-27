@@ -3,24 +3,24 @@ class Route
 {
     public static $routes = array();
 
-    public static function get(string $url, string $action, bool $authRequired)
+    public static function get(string $url, string $action, bool $authRequired, bool $isAdmin)
     {
-        self::$routes[] = new RouteItem("GET", $url, $action, $authRequired);
+        self::$routes[] = new RouteItem("GET", $url, $action, $authRequired, $isAdmin);
     }
 
-    public static function post(string $url, string $action, bool $authRequired)
+    public static function post(string $url, string $action, bool $authRequired, bool $isAdmin)
     {
-        self::$routes[] = new RouteItem("POST", $url, $action, $authRequired);
+        self::$routes[] = new RouteItem("POST", $url, $action, $authRequired, $isAdmin);
     }
 
-    public static function put(string $url, string $action, bool $authRequired)
+    public static function put(string $url, string $action, bool $authRequired, bool $isAdmin)
     {
-        self::$routes[] = new RouteItem("PUT", $url, $action, $authRequired);
+        self::$routes[] = new RouteItem("PUT", $url, $action, $authRequired, $isAdmin);
     }
 
-    public static function delete(string $url, string $action, bool $authRequired)
+    public static function delete(string $url, string $action, bool $authRequired, bool $isAdmin)
     {
-        self::$routes[] = new RouteItem("DELETE", $url, $action, $authRequired);
+        self::$routes[] = new RouteItem("DELETE", $url, $action, $authRequired, $isAdmin);
     }
 
     public static function resolve()
@@ -48,13 +48,15 @@ class RouteItem
     private $action;
     private $params = [];
     private $authRequired;
+    private $isAdmin;
 
-    public function __construct(string $method, string $url, string $action, bool $authRequired)
+    public function __construct(string $method, string $url, string $action, bool $authRequired, bool $isAdmin)
     {
         $this->method = $method;
         $this->url = $url;
         $this->action = $action;
         $this->authRequired = $authRequired;
+        $this->isAdmin = $isAdmin;
     }
 
     public function matches($method, $url)
@@ -79,6 +81,10 @@ class RouteItem
         if ($this->authRequired && !isset($_SESSION["user"])) {
             header("Location: /ProjectManager/auth/sign-in");
             exit();
+        }
+
+        if ($this->isAdmin && $_SESSION["user"]->getRole() != "admin") {
+            throw new UnauthorizedException();
         }
 
         list($controller, $method) = explode("@", $this->action);

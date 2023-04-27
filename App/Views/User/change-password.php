@@ -13,7 +13,7 @@ ob_start();
 </div>
 
 <div class="container my-3 p-0 rounded-3 border shadow-md">
-    <form class="row g-3 p-3" action="/Projectmanager/auth/<?= $userId  ?>/update" method="POST" onsubmit="return validateChangePassword(event)">
+    <form class="row g-3 p-3" action="/Projectmanager/users/<?= $userId  ?>/update" method="POST" onsubmit="return validateChangePassword(event)">
         <p><?= $error ?></p>
         <input type="hidden" name="action" value="change-password">
         <div class="mb-3">
