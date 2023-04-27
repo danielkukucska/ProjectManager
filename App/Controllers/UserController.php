@@ -67,7 +67,7 @@ class UserController extends Controller
                 $this->userService->demoteUser($_POST["userId"], $_SESSION["user"]->getId());
                 break;
             default:
-                throw new Error("Invalid update action");
+                throw new InvalidArgumentException("Invalid update action");
         }
     }
 }

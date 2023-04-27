@@ -15,13 +15,13 @@ class ProjectService
         $project = $this->projectRepository->getById($id);
 
         if (!$project) {
-            return null;
+            throw new NotFoundException("Project not found.");
         }
 
         $owner = $this->userRepository->getById($project->getOwnerId());
 
         if (!$owner) {
-            return null;
+            throw new NotFoundException("Owner user not found.");
         }
 
         $ownerDTO = new ViewUserDTO($owner);
@@ -38,7 +38,7 @@ class ProjectService
             $owner = $this->userRepository->getById($project->getOwnerId());
 
             if (!$owner) {
-                return null;
+                throw new NotFoundException("Owner user not found.");
             }
 
             $ownerDTO = new ViewUserDTO($owner);
@@ -58,7 +58,7 @@ class ProjectService
             $owner = $this->userRepository->getById($project->getOwnerId());
 
             if (!$owner) {
-                return null;
+                throw new NotFoundException("Owner user not found.");
             }
 
             $ownerDTO = new ViewUserDTO($owner);
@@ -85,7 +85,7 @@ class ProjectService
         $owner = $this->userRepository->getById($project->getOwnerId());
 
         if (!$owner) {
-            return null;
+            throw new NotFoundException("Owner user not found.");
         }
 
         $ownerDTO = new ViewUserDTO($owner);
@@ -98,7 +98,7 @@ class ProjectService
         $project = $this->projectRepository->getById($id);
 
         if (!$project) {
-            throw new InvalidArgumentException("Project not found.");
+            throw new NotFoundException("Project not found.");
         }
 
         $project->setName($projectDTO->getName());
@@ -112,7 +112,7 @@ class ProjectService
         $owner = $this->userRepository->getById($project->getOwnerId());
 
         if (!$owner) {
-            return null;
+            throw new NotFoundException("Owner user not found.");
         }
 
         $ownerDTO = new ViewUserDTO($owner);

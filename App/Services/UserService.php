@@ -29,7 +29,7 @@ class UserService
             return new ViewUserDTO($user);
         }
 
-        throw new Exception("Not authenticated.");
+        throw new NotAuthenticatedException("Not authenticated.");
     }
 
     public function updatePassword(string $email, string $currentPassword, string $newPassword)
@@ -37,11 +37,11 @@ class UserService
         $user = $this->userRepository->getByEmail($email);
 
         if (!$user) {
-            throw new Exception("User not found");
+            throw new NotAuthenticatedException("User not found");
         }
 
         if (!password_verify($currentPassword, $user->getPassword())) {
-            throw new Exception("Current password is incorrect");
+            throw new NotAuthenticatedException("Current password is incorrect");
         }
 
         $user->setPassword(password_hash($newPassword, PASSWORD_DEFAULT));
@@ -54,11 +54,11 @@ class UserService
         $requestorUser = $this->userRepository->getById($requestorUserId);
 
         if (!$requestorUser) {
-            throw new Exception("User not found");
+            throw new NotFoundException("User not found");
         }
 
         if ($requestorUser->getRole() !== "admin") {
-            throw new Exception("Only admins can promote");
+            throw new UnauthorizedException("Only admins can promote");
         }
 
         $user = $this->userRepository->getById($userId);
@@ -71,17 +71,17 @@ class UserService
     public function demoteUser(int $userId, string $requestorUserId)
     {
         if ($userId === $requestorUserId) {
-            throw new Exception("Can't demote yourself");
+            throw new UnauthorizedException("Can't demote yourself");
         }
 
         $requestorUser = $this->userRepository->getById($requestorUserId);
 
         if (!$requestorUser) {
-            throw new Exception("User not found");
+            throw new UnauthorizedException("User not found");
         }
 
         if ($requestorUser->getRole() !== "admin") {
-            throw new Exception("Only admins can demote");
+            throw new UnauthorizedException("Only admins can demote");
         }
 
         $user = $this->userRepository->getById($userId);

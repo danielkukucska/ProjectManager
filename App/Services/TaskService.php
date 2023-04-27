@@ -19,13 +19,13 @@ class TaskService
         $project = $this->projectRepository->getById($projectId);
 
         if (!$project) {
-            throw new Error("Project not found.");
+            throw new NotFoundException("Project not found.");
         }
 
         $owner = $this->userRepository->getById($project->getOwnerId());
 
         if (!$owner) {
-            throw new Error("Owner not found.");
+            throw new NotFoundException("Owner not found.");
         }
 
         $ownerDTO = new ViewUserDTO($owner);
@@ -38,7 +38,7 @@ class TaskService
         $task = $this->taskRepository->getById($id);
 
         if (!$task) {
-            throw new Error("Task not found.");
+            throw new NotFoundException("Task not found.");
         }
 
         $userTasks = $this->userTaskRepository->getAllByTaskId($task->getId());
@@ -47,7 +47,7 @@ class TaskService
             $assignee = $this->userRepository->getById($userTask->getUserId());
 
             if (!$assignee) {
-                throw new Error("User not found.");
+                throw new NotFoundException("User not found.");
             } else {
                 $assignees[] = new ViewUserDTO($assignee);
             }
@@ -69,7 +69,7 @@ class TaskService
                 $assignee = $this->userRepository->getById($userTask->getId());
 
                 if (!$assignee) {
-                    throw new Error("User not found.");
+                    throw new NotFoundException("User not found.");
                 } else {
                     $assignees[] = new ViewUserDTO($assignee);
                 }
@@ -94,7 +94,7 @@ class TaskService
                 $assignee = $this->userRepository->getById($userTask->getUserId());
 
                 if (!$assignee) {
-                    throw new Error("User not found-");
+                    throw new NotFoundException("User not found-");
                 } else {
                     $assignees[] = new ViewUserDTO($assignee);
                 }
@@ -126,7 +126,7 @@ class TaskService
         $task = $this->taskRepository->getById($id);
 
         if (!$task) {
-            throw new Exception("Task not found");
+            throw new NotFoundException("Task not found");
         }
 
         $task->setName($updateTaskDTO->getName());
@@ -143,12 +143,12 @@ class TaskService
     {
         $task = $this->taskRepository->getById($createUserTaskDTO->getTaskId());
         if (!$task) {
-            throw new Exception("Task not found");
+            throw new NotFoundException("Task not found");
         }
 
         $user = $this->userRepository->getById($createUserTaskDTO->getUserId());
         if (!$user) {
-            throw new Exception("User not found");
+            throw new NotFoundException("User not found");
         }
 
 
@@ -166,7 +166,7 @@ class TaskService
         $userTask = $this->userTaskRepository->getByUserIdTaskId($userId, $taskId);
 
         if (!$userTask) {
-            throw new Exception("Assignment not found");
+            throw new NotFoundException("Assignment not found");
         }
 
         //todo check timesheets?

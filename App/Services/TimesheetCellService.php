@@ -8,11 +8,6 @@ class TimesheetCellServices
         $this->$timesheetCellRepository = $timesheetCellRepository;
     }
 
-    public function getById(int $id)
-    {
-        throw new Exception("Not needed in the app");
-    }
-
     public function getByTimesheetLineId(int $timesheetLineId)
     {
         $timesheetCells = $this->timesheetCellRepository->getAllByTimesheetLineId($timesheetLineId);
@@ -34,8 +29,6 @@ class TimesheetCellServices
             $createTimesheetCellDTO->getDate(),
         );
 
-        //TODO check if there is any saved for that date? 
-        //Or the cells should be generated when a timesheet line is created for the week
         $this->timesheetCellRepository->save($timesheetCell);
 
         return new ViewTimesheetCellDTO($timesheetCell);
@@ -46,7 +39,7 @@ class TimesheetCellServices
         $timesheetCell = $this->timesheetCellRepository->getById($id);
 
         if (!$timesheetCell) {
-            throw new Exception("Task not found");
+            throw new NotFoundException("Task not found");
         }
 
         $timesheetCell->setHoursWorked($updateTimesheetCellDTO->getHoursWorked());

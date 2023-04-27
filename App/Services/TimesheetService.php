@@ -29,7 +29,7 @@ class TimesheetService
         $timesheet = $this->timesheetRepository->getById($timesheetId);
 
         if ($timesheet->getUserId() != $_SESSION["user"]->getId()) {
-            return null;
+            throw new NotFoundException("User not found.");
         }
 
         $timesheetLines = $this->timesheetLineRepository->getAllByTimesheetId($timesheet->getId());
@@ -79,7 +79,7 @@ class TimesheetService
 
     public function getUserTasks(int $timesheetId = null)
     {
-        $userTasks = $this->userTaskRepository->getAllByUserId($_SESSION["user"]->getId(),$timesheetId);       
+        $userTasks = $this->userTaskRepository->getAllByUserId($_SESSION["user"]->getId(), $timesheetId);
         $taskDTOs = [];
 
         foreach ($userTasks as $userTask) {
@@ -94,9 +94,9 @@ class TimesheetService
     public function createTimesheetLine(CreateTimesheetLineDTO $createTimesheetLineDTO)
     {
         $timesheet = $this->timesheetRepository->getById($createTimesheetLineDTO->getTimesheetid());
-        //TODO error if not found
+
         if ($timesheet == null) {
-            return null;
+            throw new NotFoundException("Timesheet not found.");
         }
 
         $timesheetLine = new TimesheetLine(

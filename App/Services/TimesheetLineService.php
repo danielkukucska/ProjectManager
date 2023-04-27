@@ -10,11 +10,6 @@ class TimesheetLineServices
         $this->$timesheetCellRepository = $timesheetCellRepository;
     }
 
-    public function getById(int $id)
-    {
-        throw new Exception("Not needed in the app");
-    }
-
     public function getByTimesheetId(int $timesheetId)
     {
         $timesheetLines = $this->timesheetLineRepository->getAllByTimesheetId($timesheetId);
