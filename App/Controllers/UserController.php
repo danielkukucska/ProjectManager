@@ -57,8 +57,16 @@ class UserController extends Controller
         //todo secure roles and authorization
         switch ($_POST["action"]) {
             case "change-password":
-                $this->userService->updatePassword($_POST["email"], $_POST["currentPassword"], $_POST["newPassword"]);
-                header("Location: /Projectmanager/auth");
+                try {
+                    $this->userService->updatePassword($_POST["email"], $_POST["currentPassword"], $_POST["newPassword"]);
+                    header("Location: /Projectmanager/auth");
+                } catch (Exception $e) {
+                    if ($e instanceof  NotAuthenticatedException) {
+                        $this->view("user/change-password", ["userId" => $userId, "error" => "Unauthorized."]);
+                    } else {
+                        throw new InternalServerException();
+                    }
+                }
                 exit();
             case "promote":
                 $this->userService->promoteUser($_POST["userId"], $_SESSION["user"]->getId());

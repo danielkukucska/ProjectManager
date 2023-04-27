@@ -1,6 +1,7 @@
 <?php
 $userId = $data["userId"];
 $pageTitle = "Update user";
+$error = isset($data["error"]) ? $data["error"] : "";
 ob_start();
 ?>
 <script src="https://cdn.jsdelivr.net/npm/zod@3.21.4/lib/index.umd.min.js "></script>
@@ -13,6 +14,7 @@ ob_start();
 
 <div class="container my-3 p-0 rounded-3 border shadow-md">
     <form class="row g-3 p-3" action="/Projectmanager/auth/<?= $userId  ?>/update" method="POST" onsubmit="return validateChangePassword(event)">
+        <p><?= $error ?></p>
         <input type="hidden" name="action" value="change-password">
         <div class="mb-3">
             <label class="form-label" for="email">
