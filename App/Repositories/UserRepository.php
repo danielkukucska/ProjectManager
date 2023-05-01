@@ -8,13 +8,19 @@ class UserRepository
         $this->db = $db;
     }
 
-    public function getAll()
+    public function getAll(int $exlcudeByTaskId = null)
     {
-        $stmt = $this->db->prepare("SELECT * FROM users");
-        $stmt->execute();
+        $users = [];
+
+        if ($exlcudeByTaskId == null) {
+            $stmt = $this->db->prepare("SELECT * FROM users");
+            $stmt->execute();
+        } else {
+            $stmt = $this->db->prepare("SELECT * FROM users WHERE id NOT IN ( SELECT user_id FROM users_tasks WHERE task_id = ? );");
+            $stmt->execute([$exlcudeByTaskId]);
+        }
         $rows = $stmt->fetchAll();
 
-        $users = [];
         foreach ($rows as $row) {
             $user = new User($row["id"], $row["name"], $row["email"], $row["password"], $row["role"]);
             $users[] = $user;

@@ -173,9 +173,9 @@ class TaskService
         $this->userTaskRepository->remove($userTask);
     }
 
-    public function getUsers()
+    public function getUsers(int $taskId)
     {
-        $users = $this->userRepository->getAll();
+        $users = $this->userRepository->getAll($taskId);
         $userDTOs = [];
 
         foreach ($users as $user) {

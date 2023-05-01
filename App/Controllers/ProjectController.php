@@ -69,8 +69,6 @@ class ProjectController extends Controller
 
     public function destroy($projectId)
     {
-        throw new Error("Not implemented");
-        //$this->projectService->deleteProject($id);
-        // redirect to the index page
+        throw new UnauthorizedException("Projects can't be deleted");
     }
 }

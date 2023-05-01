@@ -60,7 +60,7 @@ class TaskController extends Controller
     {
         $project = $this->taskService->getProject($projectId);
         $task = $this->taskService->getById($taskId);
-        $users = $this->taskService->getUsers();
+        $users = $this->taskService->getUsers($taskId);
         $this->view("task/update", ["project" => $project, "task" => $task, "users" => $users]);
     }
 
@@ -74,8 +74,6 @@ class TaskController extends Controller
 
     public function destroy($projectId, $taskId)
     {
-        throw new Error("Not implemented");
-        //$this->taskService->deleteTask($id);
-        // redirect to the index page
+        throw new UnauthorizedException("Tasks can't be deleted");
     }
 }

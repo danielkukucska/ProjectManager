@@ -19,24 +19,24 @@ class App
         Route::get("/projects/create", "ProjectController@create", true, false);
         Route::get("/projects/{projectId}", "ProjectController@show", true, false);
         Route::get("/projects/{projectId}/edit", "ProjectController@edit", true, false);
-        Route::get("/projects/{projectId}/delete", "ProjectController@delete", true, false);
+        // Route::get("/projects/{projectId}/delete", "ProjectController@delete", true, false);
 
         Route::post("/projects", "ProjectController@store", true, false);
         Route::post("/projects/{projectId}", "ProjectController@update", true, false);
-        Route::post("/projects/{projectId}/delete", "ProjectController@destroy", true, false);
+        // Route::post("/projects/{projectId}/delete", "ProjectController@destroy", true, false);
 
         //tasks
         Route::get("/projects/{projectId}/tasks", "TaskController@index", true, false);
         Route::get("/projects/{projectId}/tasks/create", "TaskController@create", true, false);
         Route::get("/projects/{projectId}/tasks/{taskId}", "TaskController@show", true, false);
         Route::get("/projects/{projectId}/tasks/{taskId}/edit", "TaskController@edit", true, false);
-        Route::get("/projects/{projectId}/tasks/{taskId}/delete", "TaskController@delete", true, false);
+        // Route::get("/projects/{projectId}/tasks/{taskId}/delete", "TaskController@delete", true, false);
 
         Route::post("/projects/{projectId}/tasks", "TaskController@store", true, false);
         Route::post("/projects/{projectId}/tasks/{taskId}", "TaskController@update", true, false);
         Route::post("/projects/{projectId}/tasks/{taskId}/assignments", "TaskController@addAssignment", true, false);
         Route::post("/projects/{projectId}/tasks/{taskId}/assignments/{userId}/delete", "TaskController@removeAssignment", true, false);
-        Route::post("/projects/{projectId}/tasks/{taskId}/delete", "TaskController@destroy", true, false);
+        // Route::post("/projects/{projectId}/tasks/{taskId}/delete", "TaskController@destroy", true, false);
 
         //timesheets
         Route::get("/timesheets", "TimesheetController@index", true, false);
@@ -48,7 +48,7 @@ class App
         Route::post("/timesheets/{timesheetId}", "TimesheetController@update", true, false);
         Route::post("/timesheets/{timesheetId}/timesheetlines", "TimesheetController@createTimesheetLine", true, false);
         Route::post("/timesheets/{timesheetId}/timesheetlines/update", "TimesheetController@updateTimesheetLine", true, false);
-        Route::post("/timesheets/{timesheetId}/delete", "TimesheetController@destroy", true, false);
+        // Route::post("/timesheets/{timesheetId}/delete", "TimesheetController@destroy", true, false);
 
         //users
         Route::get("/users", "UserController@listUsers", true, true);

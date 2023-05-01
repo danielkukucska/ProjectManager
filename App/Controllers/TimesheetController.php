@@ -93,8 +93,6 @@ class TimesheetController extends Controller
 
     public function destroy($timesheetId)
     {
-        throw new Error("Not implemented");
-        //$this->timesheetService->deleteTimesheet($id);
-        // redirect to the index page
+        throw new UnauthorizedException("Timesheets can't be deleted");
     }
 }
