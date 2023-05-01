@@ -30,9 +30,11 @@ ob_start();
             <?php foreach ($projects as $project) : ?>
                 <tr>
                     <td>
-                        <a class="btn btn-primary" href="./projects/<?= $project->getId() ?>">View</a>
-                        <a class="btn btn-primary" href="./projects/<?= $project->getId() ?>/tasks">Tasks</a>
-                        <a class="btn btn-secondary" href="./projects/<?= $project->getId() ?>/edit">Edit</a>
+                        <div class="d-flex gap-1 flex-md-row flex-column">
+                            <a class="btn btn-primary" href="./projects/<?= $project->getId() ?>">View</a>
+                            <a class="btn btn-primary" href="./projects/<?= $project->getId() ?>/tasks">Tasks</a>
+                            <a class="btn btn-secondary" href="./projects/<?= $project->getId() ?>/edit">Edit</a>
+                        </div>
                     </td>
                     <td><?= $project->getId() ?></td>
                     <td><?= $project->getName() ?></td>
