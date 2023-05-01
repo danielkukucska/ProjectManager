@@ -6,15 +6,18 @@ ob_start();
 ?>
 <div class="container p-0 my-3 rounded-3 border shadow-md">
     <div class="row p-4 align-items-center justify-content-between">
-        <div class="col-md-7 p-3">
+        <div class="col-md-12 p-3 d-flex justify-content-between align-items-center">
             <h1 class="display-4 fw-bold lh-1">Timesheet</h1>
-            <p class="lead">
-                From: <?= date_format($timesheet->getStartDate(), "Y.m.d") ?> -
-                To: <?= date_format($timesheet->getEndDate(), "Y.m.d") ?>
-            </p>
+            <a class="btn btn-primary" href="./<?= $timesheet->getId() ?>/edit">Edit</a>
         </div>
+        <p class="lead">
+            From: <?= date_format($timesheet->getStartDate(), "Y.m.d") ?> -
+            To: <?= date_format($timesheet->getEndDate(), "Y.m.d") ?>
+        </p>
     </div>
 </div>
+
+
 
 <div class="container my-3 p-0 rounded-3 border shadow-md table-responsive">
     <table class="table table-striped table-dark mb-0">

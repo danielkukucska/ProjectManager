@@ -4,13 +4,9 @@ $project = $data["project"];
 $pageTitle = $project->getName() . " - Tasks";
 ob_start();
 ?>
-<div class="container p-0 my-3 rounded-3 border shadow-md">
-    <div class="row p-4 align-items-center justify-content-between">
-        <div class="col-md-7 p-3">
-            <h1 class="display-4 fw-bold lh-1">Tasks for project: <?= $project->getName() ?></h1>
-            <a class="btn btn-primary" href="./tasks/create">Create new task</a>
-        </div>
-    </div>
+<div class="container p-3 my-3 rounded-3 border shadow-md d-flex align-items-center justify-content-between">
+    <h1 class="display-4 fw-bold lh-1">Tasks for project: <?= $project->getName() ?></h1>
+    <a class="btn btn-primary" href="./tasks/create">Create new task</a>
 </div>
 
 <div class="container my-3 p-0 rounded-3 border shadow-md table-responsive">
