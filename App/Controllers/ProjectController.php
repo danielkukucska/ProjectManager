@@ -28,24 +28,6 @@ class ProjectController extends Controller
 
     public function store()
     {
-        // Validate input
-        // $validation = $this->projectService->validateCreateInput($_POST);
-        // if ($validation->failed()) {
-        //     return $response->withJson($validation->getErrors(), 400);
-        // }
-
-        // // Authenticate user
-        // $user = $this->projectService->authenticateUser($request);
-        // if (!$user) {
-        //     return $response->withJson(["error" => "Unauthorized"], 401);
-        // }
-
-        // // Check authorization
-        // if (!$this->projectService->canCreateProject($user)) {
-        //     return $response->withJson(["error" => "Forbidden"], 403);
-        // }
-
-        // $data = $_POST;
         $data = new CreateProjectDTO($_POST["name"], $_POST["description"], new DateTime($_POST["startDate"]), new DateTime($_POST["endDate"]), $_POST["ownerId"]);
         $project = $this->projectService->create($data);
         header("Location: projects/" . $project->getId());
