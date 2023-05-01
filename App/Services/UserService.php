@@ -12,7 +12,7 @@ class UserService
     {
         $existingUser = $this->userRepository->getByEmail($email);
         if ($existingUser) {
-            throw new Exception("A user with this email already exists");
+            throw new InvalidArgumentException("A user with this email already exists");
         }
 
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);

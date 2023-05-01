@@ -1,5 +1,6 @@
 <?php
 $pageTitle = "Register";
+$error = isset($data["error"]) ? $data["error"] : "";
 ob_start();
 ?>
 <div class="container p-4 my-3 rounded-3 border shadow-md">
@@ -29,6 +30,9 @@ ob_start();
                 Password
             </label>
             <input class="form-control" type="password" id="password" name="password" class="card-title" placeholder="Password" />
+        </div>
+        <div class="mb-3 d-flex gap-3 flex-md-row flex-column">
+            <span class="error-message"><?= $error ?></span>
         </div>
         <div class="mb-3 d-flex gap-3 flex-md-row flex-column">
             <input class="form-control" type="submit" value="Sign Up" />

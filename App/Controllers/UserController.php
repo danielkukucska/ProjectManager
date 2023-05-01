@@ -21,9 +21,17 @@ class UserController extends Controller
 
     public function store()
     {
-        $this->userService->signUp($_POST["name"], $_POST["email"], $_POST["password"]);
-        header("Location: sign-in");
-        exit();
+        try {
+            $this->userService->signUp($_POST["name"], $_POST["email"], $_POST["password"]);
+            header("Location: sign-in");
+            exit();
+        } catch (Exception $e) {
+            if ($e instanceof  InvalidArgumentException) {
+                $this->view("user/sign-up", ["error" => $e->getMessage()]);
+            } else {
+                throw new InternalServerException();
+            }
+        }
     }
 
     public function signIn()
