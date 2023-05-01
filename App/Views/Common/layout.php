@@ -38,7 +38,7 @@
                             <li class="nav-item dropdown">
 
                                 <a class="nav-link dropdown-toggle" href="/ProjectManager/projects" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img class="d-md-block" src="/ProjectManager/Public/images/icons/calendar.svg" alt="Calendar icon" />
+                                    <img class="d-md-block" src="/ProjectManager/Public/images/icons/projects.svg" alt="Projects icon" />
                                     Projects
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-dark">
@@ -76,33 +76,33 @@
                                 <?php if ($_SESSION["user"]->getRole() == "admin") : ?>
                                     <li class="nav-item">
                                         <a href="/ProjectManager/users" class="nav-link">
-                                            <img class="d-md-block" src="/ProjectManager/Public/images/icons/videos.svg" alt="Videos icon" />
+                                            <img class="d-md-block" src="/ProjectManager/Public/images/icons/users.svg" alt="Users icon" />
                                             Users
                                         </a>
                                     </li>
                                 <?php endif; ?>
                                 <li class="nav-item">
                                     <a href="/ProjectManager/auth" class="nav-link">
-                                        <img class="d-md-block" src="/ProjectManager/Public/images/icons/videos.svg" alt="Videos icon" />
+                                        <img class="d-md-block" src="/ProjectManager/Public/images/icons/user.svg" alt="User icon" />
                                         Me
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="/ProjectManager/auth/sign-out" class="nav-link">
-                                        <img class="d-md-block" src="/ProjectManager/Public/images/icons/videos.svg" alt="Videos icon" />
+                                        <img class="d-md-block" src="/ProjectManager/Public/images/icons/sign-out.svg" alt="Sign Out icon" />
                                         Sign Out
                                     </a>
                                 </li>
                             <?php else : ?>
                                 <li class="nav-item">
                                     <a href="/ProjectManager/auth/sign-in" class="nav-link">
-                                        <img class="d-md-block" src="/ProjectManager/Public/images/icons/videos.svg" alt="Videos icon" />
+                                        <img class="d-md-block" src="/ProjectManager/Public/images/icons/sign-in.svg" alt="Sign In icon" />
                                         Sign In
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="/ProjectManager/auth/sign-up" class="nav-link">
-                                        <img class="d-md-block" src="/ProjectManager/Public/images/icons/videos.svg" alt="Videos icon" />
+                                        <img class="d-md-block" src="/ProjectManager/Public/images/icons/sign-up.svg" alt="Sign Up icon" />
                                         Sign Up
                                     </a>
                                 </li>
