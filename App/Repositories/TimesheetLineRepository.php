@@ -50,9 +50,9 @@ class TimesheetLineRepository
         }
     }
 
-    public function delete(TimesheetLine $timesheetLine)
+    public function delete(int $timesheetLineId)
     {
         $stmt = $this->db->prepare("DELETE FROM timesheet_lines WHERE id = ?");
-        $stmt->execute([$timesheetLine->getId()]);
+        $stmt->execute([$timesheetLineId]);
     }
 }

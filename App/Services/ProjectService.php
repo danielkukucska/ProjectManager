@@ -120,6 +120,21 @@ class ProjectService
         return new ViewProjectDTO($project, $ownerDTO);
     }
 
+    public function delete(int $projectId)
+    {
+        $project = $this->projectRepository->getById($projectId);
+
+        if (!$project) {
+            throw new NotFoundException("Project not found.");
+        }
+
+        if ($project->getOwnerId() != $_SESSION["user"]->getId()) {
+            throw new UnauthorizedException("Only the owner can delete the project");
+        } else {
+            $this->projectRepository->delete($projectId);
+        }
+    }
+
     public function getUsers()
     {
         $users = $this->userRepository->getAll();

@@ -72,8 +72,17 @@ class TaskController extends Controller
         exit();
     }
 
+    public function delete($projectId, $taskId)
+    {
+        $project = $this->taskService->getProject($projectId);
+        $task = $this->taskService->getById($taskId);
+        $this->view("task/delete", ["task" => $task, "project" => $project]);
+    }
+
     public function destroy($projectId, $taskId)
     {
-        throw new UnauthorizedException("Tasks can't be deleted");
+        $this->taskService->delete($taskId);
+        header("Location: /ProjectManager/projects/" . $projectId . "/tasks");
+        exit();
     }
 }

@@ -63,9 +63,9 @@ class ProjectRepository
         }
     }
 
-    public function delete(Project $project)
+    public function delete(int $projectId)
     {
         $stmt = $this->db->prepare("DELETE FROM projects WHERE id = ?");
-        $stmt->execute([$project->getId()]);
+        $stmt->execute([$projectId]);
     }
 }

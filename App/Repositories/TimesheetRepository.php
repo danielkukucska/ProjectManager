@@ -49,10 +49,4 @@ class TimesheetRepository
             $timesheet->setId($this->db->lastInsertId());
         }
     }
-
-    public function delete(Timesheet $timesheet)
-    {
-        $stmt = $this->db->prepare("DELETE FROM timesheets WHERE id = ?");
-        $stmt->execute([$timesheet->getId()]);
-    }
 }

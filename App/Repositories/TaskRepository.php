@@ -63,9 +63,9 @@ class TaskRepository
         }
     }
 
-    public function delete(Task $task)
+    public function delete(int $taskId)
     {
         $stmt = $this->db->prepare("DELETE FROM tasks WHERE id = ?");
-        $stmt->execute([$task->getId()]);
+        $stmt->execute([$taskId]);
     }
 }

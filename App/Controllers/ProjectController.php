@@ -49,8 +49,16 @@ class ProjectController extends Controller
         exit();
     }
 
+    public function delete($projectId)
+    {
+        $project = $this->projectService->getById($projectId);
+        $this->view("project/delete", ["project" => $project]);
+    }
+
     public function destroy($projectId)
     {
-        throw new UnauthorizedException("Projects can't be deleted");
+        $this->projectService->delete($projectId);
+        header("Location: /ProjectManager/projects/" . $projectId);
+        exit();
     }
 }

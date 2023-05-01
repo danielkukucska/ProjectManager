@@ -34,6 +34,7 @@ ob_start();
                             <a class="btn btn-primary" href="./projects/<?= $project->getId() ?>">View</a>
                             <a class="btn btn-primary" href="./projects/<?= $project->getId() ?>/tasks">Tasks</a>
                             <a class="btn btn-secondary" href="./projects/<?= $project->getId() ?>/edit">Edit</a>
+                            <a class="btn btn-danger" href="./projects/<?= $project->getId() ?>/delete">Delete</a>
                         </div>
                     </td>
                     <td><?= $project->getId() ?></td>

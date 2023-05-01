@@ -169,8 +169,28 @@ class TaskService
             throw new NotFoundException("Assignment not found");
         }
 
-        //todo check timesheets?
         $this->userTaskRepository->remove($userTask);
+    }
+
+    public function delete(int $taskId)
+    {
+        $task = $this->taskRepository->getById($taskId);
+
+        if (!$task) {
+            throw new NotFoundException("Task not found.");
+        }
+
+        $project = $this->projectRepository->getById($task->getProjectId());
+
+        if (!$project) {
+            throw new NotFoundException("Project not found.");
+        }
+
+        if ($project->getOwnerId() != $_SESSION["user"]->getId()) {
+            throw new UnauthorizedException("Only the project owner can delete the tasks");
+        } else {
+            $this->taskRepository->delete($taskId);
+        }
     }
 
     public function getUsers(int $taskId)

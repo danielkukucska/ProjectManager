@@ -13,6 +13,7 @@ ob_start();
                     <div>
                         <a class="btn btn-secondary" href="./<?= $project->getId() ?>/tasks">Tasks</a>
                         <a class="btn btn-primary" href="./<?= $project->getId() ?>/edit">Edit</a>
+                        <a class="btn btn-danger" href="./<?= $project->getId() ?>/delete">Delete</a>
                     </div>
                 </div>
                 <ul class="list-group">

@@ -10,7 +10,10 @@ ob_start();
             <div class="col-md mb-3">
                 <div class="d-flex justify-content-between align-items-center">
                     <h2 class="mb-3 anchor">Task Details</h2>
-                    <a class="btn btn-primary" href="./<?= $task->getId() ?>/edit">Edit</a>
+                    <div>
+                        <a class="btn btn-primary" href="./<?= $task->getId() ?>/edit">Edit</a>
+                        <a class="btn btn-danger" href="./<?= $task->getId() ?>/delete">Delete</a>
+                    </div>
                 </div>
                 <ul class="list-group">
                     <li class="list-group-item d-flex justify-content-between align-items-start">

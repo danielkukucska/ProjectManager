@@ -58,9 +58,9 @@ class TimesheetCellRepository
         }
     }
 
-    public function delete(TimesheetCell $cell)
+    public function delete(int $cellId)
     {
         $stmt = $this->db->prepare("DELETE FROM timesheet_cells WHERE id = ?");
-        $stmt->execute([$cell->getId()]);
+        $stmt->execute([$cellId]);
     }
 }

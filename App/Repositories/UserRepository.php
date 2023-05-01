@@ -67,10 +67,4 @@ class UserRepository
             $user->setId($this->db->lastInsertId());
         }
     }
-
-    public function delete(User $user)
-    {
-        $stmt = $this->db->prepare("DELETE FROM users WHERE id = ?");
-        $stmt->execute([$user->getId()]);
-    }
 }
