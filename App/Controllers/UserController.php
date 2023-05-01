@@ -80,12 +80,22 @@ class UserController extends Controller
                 }
                 exit();
             case "promote":
-                $this->userService->promoteUser($userId);
-                $this->show($userId);
+                try {
+                    $this->userService->promoteUser($userId);
+                    $this->show($userId);
+                } catch (Exception $e) {
+                    $user = $this->userService->getById($userId);
+                    $this->view("user/view", ["user" => $user, "error" => $e->getMessage()]);
+                }
                 break;
             case "demote":
-                $this->userService->demoteUser($userId);
-                $this->show($userId);
+                try {
+                    $this->userService->demoteUser($userId);
+                    $this->show($userId);
+                } catch (Exception $e) {
+                    $user = $this->userService->getById($userId);
+                    $this->view("user/view", ["user" => $user, "error" => $e->getMessage()]);
+                }
                 break;
             default:
                 throw new InvalidArgumentException("Invalid update action");

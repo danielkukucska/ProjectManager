@@ -63,7 +63,6 @@ class ProjectRepository
         }
     }
 
-    //TODO for all delete: recycle bin?
     public function delete(Project $project)
     {
         $stmt = $this->db->prepare("DELETE FROM projects WHERE id = ?");
