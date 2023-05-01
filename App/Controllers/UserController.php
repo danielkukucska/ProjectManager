@@ -46,10 +46,19 @@ class UserController extends Controller
 
     public function authenticate()
     {
-        $user = $this->userService->signIn($_POST["email"], $_POST["password"]);
-        $_SESSION["user"] = $user;
-        header("Location: /ProjectManager/auth");
-        exit();
+
+        try {
+            $user = $this->userService->signIn($_POST["email"], $_POST["password"]);
+            $_SESSION["user"] = $user;
+            header("Location: /ProjectManager/auth");
+            exit();
+        } catch (Exception $e) {
+            if ($e instanceof  NotAuthenticatedException) {
+                $this->view("user/sign-in", ["error" => "Invalid credentials"]);
+            } else {
+                throw new InternalServerException();
+            }
+        }
     }
 
     public function listUsers()
