@@ -14,7 +14,6 @@ ob_start();
 
 <div class="container my-3 p-0 rounded-3 border shadow-md">
     <form class="row g-3 p-3" action="/Projectmanager/users/<?= $userId  ?>/update" method="POST" onsubmit="return validateChangePassword(event)">
-        <p><?= $error ?></p>
         <input type="hidden" name="action" value="change-password">
         <div class="mb-3">
             <label class="form-label" for="email">
@@ -26,9 +25,10 @@ ob_start();
             <label class="form-label" for="currentPassword">
                 Current Password
             </label>
-            <input class="form-control" type="password" id="currentPassword" name="currentPassword" class="card-title" placeholder="Password" />
+            <input class="form-control <?= $error == "" ? "" : "error" ?>" type="password" id="currentPassword" name="currentPassword" class="card-title" placeholder="Password" />
+            <span class="error-message"><?= $error ?></span>
         </div>
-        <div class="mb-3">
+        <div class=" mb-3">
             <label class="form-label" for="newPassword">
                 New Password
             </label>

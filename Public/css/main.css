@@ -41,6 +41,9 @@ body > nav + * {
 	border: 2px solid red;
 }
 
+.error-message{
+	color: red;
+}
 @media (min-width: 992px) {
 	.offcanvas {
 		visibility: visible;

@@ -61,12 +61,12 @@
                                     <li>
                                         <a class="dropdown-item" href="/ProjectManager/timesheets/create">Create</a>
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                         <a class="dropdown-item" href="/ProjectManager/timesheets?filter=current">This week</a>
-                                    </li>
-                                    <li>
+                                    </li> -->
+                                    <!-- <li>
                                         <hr class="dropdown-divider" />
-                                    </li>
+                                    </li> -->
                                     <li>
                                         <a class="dropdown-item" href="/ProjectManager/timesheets">All</a>
                                     </li>

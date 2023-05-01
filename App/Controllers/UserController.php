@@ -73,7 +73,7 @@ class UserController extends Controller
                     header("Location: /Projectmanager/auth");
                 } catch (Exception $e) {
                     if ($e instanceof  NotAuthenticatedException) {
-                        $this->view("user/change-password", ["userId" => $userId, "error" => "Unauthorized."]);
+                        $this->view("user/change-password", ["userId" => $userId, "error" => "Invalid password."]);
                     } else {
                         throw new InternalServerException();
                     }
