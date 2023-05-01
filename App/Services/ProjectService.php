@@ -146,4 +146,39 @@ class ProjectService
         }
         return $userDTOs;
     }
+
+    public function downloadProgress(int $projectId)
+    {
+        $project = $this->projectRepository->getById($projectId);
+
+        if (!$project) {
+            throw new NotFoundException("Project not found.");
+        }
+
+        $progress = $this->projectRepository->getProgress($projectId);
+
+        $filename = $projectId . " - " . $project->getName() . " - progress" . "curren tdate" . ".csv";
+        $file = fopen($filename, "w");
+        $header = ["Task ID", "Task Name", "User Name", "User Email", "Date", "Hours Worked"];
+        fputcsv($file, $header, ",", " ");
+
+        foreach ($progress as $row) {
+            $data = [
+                $row->getTaskId(),
+                $row->getTaskName(),
+                $row->getUserName(),
+                $row->getUserEmail(),
+                date_format($row->getDate(), "Y.m.d"),
+                $row->getHoursWorked()
+            ];
+            fputcsv($file, $data);
+        }
+
+        fclose($file);
+
+        header("Content-type: application/csv");
+        header("Content-Disposition: attachment; filename=$filename");
+        readfile($filename);
+        unlink($filename);
+    }
 }

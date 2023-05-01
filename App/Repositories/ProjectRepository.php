@@ -68,4 +68,28 @@ class ProjectRepository
         $stmt = $this->db->prepare("DELETE FROM projects WHERE id = ?");
         $stmt->execute([$projectId]);
     }
+
+    public function getProgress(int $projectId)
+    {
+        $stmt = $this->db->prepare("SELECT tasks.id as task_id, tasks.name AS task_name, users.email as user_email, users.name AS user_name, timesheet_cells.date, timesheet_cells.hours_worked
+                                        FROM timesheet_cells
+                                        JOIN timesheet_lines ON timesheet_cells.timesheet_line_id = timesheet_lines.id
+                                        JOIN tasks ON timesheet_lines.task_id = tasks.id
+                                        JOIN timesheets ON timesheet_lines.timesheet_id = timesheets.id
+                                        JOIN users ON timesheets.user_id = users.id
+                                        JOIN users_tasks ON tasks.id = users_tasks.task_id AND users_tasks.user_id = users.id
+                                        JOIN projects ON tasks.project_id = projects.id
+                                        WHERE timesheet_cells.hours_worked > 0
+                                        AND projects.id = ?");
+        $stmt->execute([$projectId]);
+        $rows = $stmt->fetchAll();
+
+        $projectProgress = [];
+        foreach ($rows as $row) {
+            $project = new ViewProjectProgressDTO($row["task_id"], $row["task_name"], $row["user_name"], $row["user_email"], new DateTime($row["date"]), $row["hours_worked"]);
+            $projectProgress[] = $project;
+        }
+
+        return $projectProgress;
+    }
 }

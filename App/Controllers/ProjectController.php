@@ -61,4 +61,9 @@ class ProjectController extends Controller
         header("Location: /ProjectManager/projects/" . $projectId);
         exit();
     }
+
+    public function downloadProgress($projectId)
+    {
+        $this->projectService->downloadProgress($projectId);
+    }
 }

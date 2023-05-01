@@ -20,6 +20,7 @@ class App
         Route::get("/projects/{projectId}", "ProjectController@show", true, false);
         Route::get("/projects/{projectId}/edit", "ProjectController@edit", true, false);
         Route::get("/projects/{projectId}/delete", "ProjectController@delete", true, false);
+        Route::get("/projects/{projectId}/download-progress", "ProjectController@downloadProgress", true, false);
 
         Route::post("/projects", "ProjectController@store", true, false);
         Route::post("/projects/{projectId}", "ProjectController@update", true, false);

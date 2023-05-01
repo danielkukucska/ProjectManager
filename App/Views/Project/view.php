@@ -11,6 +11,7 @@ ob_start();
                 <div class="d-flex justify-content-between align-items-center">
                     <h2 class="mb-3 anchor">Project Details</h2>
                     <div>
+                        <a class="btn btn-secondary" href="./<?= $project->getId() ?>/download-progress">Download Progress</a>
                         <a class="btn btn-secondary" href="./<?= $project->getId() ?>/tasks">Tasks</a>
                         <a class="btn btn-primary" href="./<?= $project->getId() ?>/edit">Edit</a>
                         <a class="btn btn-danger" href="./<?= $project->getId() ?>/delete">Delete</a>

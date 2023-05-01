@@ -1,7 +1,7 @@
 <?php
 class Route
 {
-    public static $routes = array();
+    public static $routes = [];
 
     public static function get(string $url, string $action, bool $authRequired, bool $isAdmin)
     {
@@ -91,6 +91,6 @@ class RouteItem
         $controllerInstance = new $controller();
         $args = array_values($this->params);
 
-        call_user_func_array(array($controllerInstance, $method), $args);
+        call_user_func_array([$controllerInstance, $method], $args);
     }
 }
