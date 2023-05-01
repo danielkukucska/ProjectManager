@@ -13,7 +13,6 @@ class ViewTaskDTO
         $this->id = $task->getId();
         $this->name = $task->getName();
         $this->description = $task->getDescription();
-        //TODO expand? not necessary because user flow, no place in app where you have task and not the project, maybe timesheet?
         $this->projectId = $task->getProjectId();
         $this->status = $task->getStatus();
         $this->assignees = $assignees;

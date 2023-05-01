@@ -7,7 +7,6 @@ class CreateProjectDTO
     private DateTime $endDate;
     private int $ownerId;
 
-    //TODO check contructor params
     public function __construct(string $name, string $description, DateTime $startDate, DateTime $endDate, int $ownerId)
     {
 

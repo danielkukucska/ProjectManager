@@ -32,6 +32,20 @@ ob_start();
             <input class="form-control" type="reset" value="Reset" />
         </div>
     </form>
+
+    <form class="row g-3 p-3" action="/Projectmanager/projects/<?= $project->getId() ?>/tasks/import" method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label class="form-label" for="tasks">
+                Import Tasks
+            </label>
+            <input class="form-control" type="file" id="tasks" name="tasks" class="card-title" accept=".csv" required />
+        </div>
+
+        <div class="mb-3 d-flex gap-3 flex-md-row flex-column">
+            <input class="form-control" type="submit" value="Import" />
+            <input class="form-control" type="reset" value="Reset" />
+        </div>
+    </form>
 </div>
 <?php
 $content = ob_get_clean();

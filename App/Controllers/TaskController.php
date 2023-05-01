@@ -56,6 +56,14 @@ class TaskController extends Controller
         exit();
     }
 
+    public function import($projectId)
+    {
+        $this->taskService->import($projectId);
+
+        header("Location: /ProjectManager/projects/" . $projectId . "/tasks");
+        exit();
+    }
+
     public function edit($projectId, $taskId)
     {
         $project = $this->taskService->getProject($projectId);

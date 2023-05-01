@@ -33,6 +33,7 @@ class App
         Route::get("/projects/{projectId}/tasks/{taskId}/delete", "TaskController@delete", true, false);
 
         Route::post("/projects/{projectId}/tasks", "TaskController@store", true, false);
+        Route::post("/projects/{projectId}/tasks/import", "TaskController@import", true, false);
         Route::post("/projects/{projectId}/tasks/{taskId}", "TaskController@update", true, false);
         Route::post("/projects/{projectId}/tasks/{taskId}/assignments", "TaskController@addAssignment", true, false);
         Route::post("/projects/{projectId}/tasks/{taskId}/assignments/{userId}/delete", "TaskController@removeAssignment", true, false);

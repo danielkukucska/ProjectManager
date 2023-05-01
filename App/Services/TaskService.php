@@ -204,4 +204,21 @@ class TaskService
         }
         return $userDTOs;
     }
+
+    public function import($projectId)
+    {
+        $tmpName = $_FILES['tasks']['tmp_name'];
+        $rows = array_map('str_getcsv', file($tmpName));
+
+        foreach ($rows as $row) {
+            if (count($row) != 2) {
+                continue;
+            }
+            $this->create(new CreateTaskDTO(
+                $row[0],
+                $row[1],
+                $projectId
+            ));
+        }
+    }
 }

@@ -10,7 +10,6 @@ class ViewTimesheetDTO
     public function __construct(Timesheet $timesheet, array $timesheetLines)
     {
         $this->id = $timesheet->getId();
-        //TODO expand?
         $this->userId = $timesheet->getUserId();
         $this->startDate = $timesheet->getStartDate();
         $this->endDate = $timesheet->getEndDate();
