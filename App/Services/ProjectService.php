@@ -157,7 +157,7 @@ class ProjectService
 
         $progress = $this->projectRepository->getProgress($projectId);
 
-        $filename = $projectId . " - " . $project->getName() . " - progress" . "curren tdate" . ".csv";
+        $filename = $projectId . " - " . $project->getName() . " - progress" . "current date" . ".csv";
         $file = fopen($filename, "w");
         $header = ["Task ID", "Task Name", "User Name", "User Email", "Date", "Hours Worked"];
         fputcsv($file, $header, ",", " ");

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="Daniel Kukucska" />
-    <meta name="description" content="Webdevelopment I. - First assessment" />
+    <meta name="description" content="Webdevelopment II. - Assessment" />
     <title><?= $pageTitle ?></title>
     <link rel="icon" type="image/x-icon" href="Public/images/favicon-32x32.png" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
@@ -18,13 +18,13 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
             <div class="container-fluid">
-                <a href="/ProjectManager" class="navbar-brand">Daniel Kukucska</a>
+                <a href="/ProjectManager" class="navbar-brand">Daniel Kukucska - Assignment</a>
                 <button class="btn btn-dark navbar-toggler border-3 px-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" aria-controls="offcanvas">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="offcanvas offcanvas-start-md bg-dark d-flex align-items-md-end" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
                     <div class="offcanvas-header d-flex d-md-none">
-                        <h5 class="offcanvas-title text-white" id="offcanvasLabel">Daniel Kukucska</h5>
+                        <h5 class="offcanvas-title text-white" id="offcanvasLabel">Daniel Kukucska - Assignment</h5>
                     </div>
                     <div class="offcanvas-body">
                         <ul class="navbar-nav">
